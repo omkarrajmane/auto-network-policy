@@ -1,0 +1,36 @@
+# === Secrets & Environment ===
+.env
+.env.*
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# === Agent/Editor Tooling ===
+.sisyphus/
+.opencode/
+.omc/
+CLAUDE.md
+AGENTS.md
+agents.md
+
+# === Config Backups ===
+*.bak.opencode
+*.pre_openrouter_run
+
+# === Root-Level Outputs ===
+/results.tsv
+/results/
+
+# === Linting/Testing Caches ===
+.ruff_cache/
+.pytest_cache/
+
+# === Lock files ===
+autonetworkpolicy/uv.lock

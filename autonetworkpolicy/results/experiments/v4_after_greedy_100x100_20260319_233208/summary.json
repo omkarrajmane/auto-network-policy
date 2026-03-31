@@ -1,0 +1,14 @@
+{
+  "batch_id": "v4_after_greedy_100x100_20260319_233208",
+  "total_runs": 100,
+  "valid_scored_runs": 100,
+  "base_weighted_greedy": 92.7077,
+  "best_weighted_avg_depth": 91.0091,
+  "worst_weighted_avg_depth": 92.2364,
+  "mean_weighted_avg_depth": 92.22412700000001,
+  "median_weighted_avg_depth": 92.2364,
+  "runs_better_than_greedy": 100,
+  "runs_at_or_worse_than_greedy": 0,
+  "best_improvement_percent": 1.8322,
+  "mean_improvement_percent": 0.5216379999999999
+}

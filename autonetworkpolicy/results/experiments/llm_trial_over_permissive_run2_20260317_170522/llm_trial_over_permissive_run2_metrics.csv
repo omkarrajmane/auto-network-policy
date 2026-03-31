@@ -1,0 +1,6 @@
+iteration,timestamp,mutation_type,mutation_description,rule_count_before,rule_count_after,rule_delta,score_before,score_after,score_delta,throughput_gbps,latency_ms,tokens_used,llm_latency_ms,verification_passed,verification_time_ms,status,error_message
+1,2026-03-17T17:05:24.360595,remove_shadowed,Rule 2 is a duplicate of rule 1 and will never be hit.,499,498,-1,499.0,950.2,451.20000000000005,0.0,0.0,0,1658.9179039001465,True,231.68182373046875,keep,
+2,2026-03-17T17:05:25.985582,remove_shadowed,"Remove rule 2, it is shadowed by rule 1 (same src_ip, dst_ip, and action)",498,497,-1,950.2,950.3,0.09999999999990905,0.0,0.0,0,1385.923147201538,True,235.64720153808594,keep,
+3,2026-03-17T17:05:28.286575,remove_shadowed,"Remove rule 13, shadowed by rule 0",497,496,-1,950.3,950.4,0.10000000000002274,0.0,0.0,0,2069.288969039917,True,226.8218994140625,keep,
+4,2026-03-17T17:05:30.233704,remove_shadowed,"Remove rule 8, shadowed by rule 6 (same source, same destination, same action)",496,495,-1,950.4,950.5,0.10000000000002274,0.0,0.0,0,1721.2908267974854,True,222.92089462280273,keep,
+5,2026-03-17T17:05:31.867903,remove_shadowed,"Rule 8 is identical to rule 0, making rule 8 completely redundant and shadowed. Removing it improves performance without changing security.",495,494,-1,950.5,950.6,0.10000000000002274,0.0,0.0,0,1374.7546672821045,True,256.6990852355957,keep,

@@ -1,0 +1,22 @@
+{
+  "experiment_name": "llm_trial_redundant_shadowing_run2",
+  "scenario": "redundant_shadowing",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-17T17:06:40.129640",
+  "end_time": "2026-03-17T17:06:54.719656",
+  "total_iterations": 5,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 0,
+  "baseline_score": 399.0,
+  "best_score": 960.6,
+  "improvement_pct": 140.75187969924812,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 12136.262893676758,
+  "avg_iteration_time_ms": 2918.0023670196533,
+  "mutation_type_distribution": {
+    "merge_adjacent": 2,
+    "remove_shadowed": 3
+  },
+  "verification_pass_rate": 1.0
+}

@@ -1,0 +1,84 @@
+# ============================================================================
+# AutoNetworkPolicy v2.1 Configuration
+# ============================================================================
+# This file contains the complete configuration for automated network policy
+# synthesis experiments using ContainerLab and LLM-based reasoning.
+#
+# Requirements:
+#   - Requires claude CLI for LLM access
+#
+# Usage:
+#   Set OPENROUTER_API_KEY environment variable, then run:
+#   python -m autonetworkpolicy
+# ============================================================================
+
+# ============================================================================
+# Infrastructure Section
+# ============================================================================
+# Defines the lab topology and container image for running experiments
+# ----------------------------------------------------------------------------
+lab:
+  topology: lab/lab.clab.yml        # Path to ContainerLab topology file
+  docker_image: autonp-node:latest  # Base image for experiment nodes
+
+# ============================================================================
+# LLM Section
+# ============================================================================
+# Large Language Model configuration for policy synthesis and refinement.
+# OpenRouter is used as the provider for access to multiple model providers.
+# ----------------------------------------------------------------------------
+llm:
+  provider: claude_subprocess
+  model: claude-opus-4-20250514
+  api_key: ""
+  max_tokens: 2048                  # Maximum tokens per response
+  temperature: 0.2                  # Sampling temperature (0-2, lower=more focused)
+  timeout_seconds: 120              # Request timeout for LLM calls
+
+# ============================================================================
+# Verification Section
+# ============================================================================
+# Reachability verification backend configuration.
+# AutoRef is the default backend for automated verification.
+# ----------------------------------------------------------------------------
+verifier:
+  backend: autoref                  # Verification backend: "autoref" or "cudd"
+  mode: "full"                      # v2: Full 5-tuple verification (IP + ports + protocol)
+  timeout_seconds: 60               # Maximum time for verification queries
+
+# ============================================================================
+# Evaluation Section
+# ============================================================================
+# Experiment evaluation parameters for measuring network policy effectiveness.
+# iperf is used for throughput measurement.
+# ----------------------------------------------------------------------------
+evaluation:
+  iperf_duration: 30                # Duration of each iperf test in seconds
+  iperf_repeats: 3                  # Number of repeated iperf measurements
+  adversarial_enabled: false        # v1: Disabled, planned for v2
+  time_budget_seconds: 120          # Maximum time allocated per experiment
+
+# ============================================================================
+# Experiment Section
+# ============================================================================
+# Overall experiment control parameters for the AutoNetworkPolicy loop.
+# Controls iteration limits and result logging.
+# ----------------------------------------------------------------------------
+experiment:
+  max_iterations: 100               # Maximum CEGIS iterations per experiment
+  log_file: results.tsv             # Output file for experiment results
+  auto_branch: true                 # Automatically create git branches per run
+
+# ============================================================================
+# Notes
+# ============================================================================
+# v2.2 Configuration:
+#   - Full 5-tuple verification (IP + ports + protocol)
+#   - AutoRef verification backend (cudd available as alternative)
+#   - Basic iperf evaluation (adversarial testing planned for v2)
+#
+# For troubleshooting:
+#   - Ensure OPENROUTER_API_KEY is set in your environment
+#   - Verify lab/lab.clab.yml exists and is valid
+#   - Check Docker can pull autonp-node:latest
+# ============================================================================

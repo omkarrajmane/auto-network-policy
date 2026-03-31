@@ -1,0 +1,6 @@
+iteration,timestamp,mutation_type,mutation_description,rule_count_before,rule_count_after,rule_delta,score_before,score_after,score_delta,throughput_gbps,latency_ms,tokens_used,llm_latency_ms,verification_passed,verification_time_ms,status,error_message
+1,2026-03-17T17:06:09.837534,merge_adjacent,"Merge rules 0 and 1, as they are identical and adjacent.",299,298,-1,299.0,970.2,671.2,0.0,0.0,0,1526.83687210083,True,160.5372428894043,keep,
+2,2026-03-17T17:06:11.530579,merge_adjacent,"Merge rules 0 and 1, as they are identical and adjacent.",298,297,-1,970.2,970.3,0.09999999999990905,0.0,0.0,0,1536.5231037139893,True,154.47402000427246,keep,
+3,2026-03-17T17:06:13.509240,merge_adjacent,"Merge rules 0 and 1, as they are identical and adjacent.",297,296,-1,970.3,970.4,0.10000000000002274,0.0,0.0,0,1819.2558288574219,True,157.4552059173584,keep,
+4,2026-03-17T17:06:15.102737,merge_adjacent,Merge rules 0 and 1 as they have identical properties and actions.,296,295,-1,970.4,970.5,0.10000000000002274,0.0,0.0,0,1428.208827972412,True,163.07711601257324,keep,
+5,2026-03-17T17:06:17.047793,remove_shadowed,Rule 2 is a duplicate of rule 1 and is shadowed by it,295,294,-1,970.5,970.6,0.10000000000002274,0.0,0.0,0,1774.3191719055176,True,166.9759750366211,keep,

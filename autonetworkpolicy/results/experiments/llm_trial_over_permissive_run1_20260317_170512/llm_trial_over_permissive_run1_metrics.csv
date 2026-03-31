@@ -1,0 +1,5 @@
+iteration,timestamp,mutation_type,mutation_description,rule_count_before,rule_count_after,rule_delta,score_before,score_after,score_delta,throughput_gbps,latency_ms,tokens_used,llm_latency_ms,verification_passed,verification_time_ms,status,error_message
+2,2026-03-17T17:05:16.069955,remove_shadowed,"Remove rule 1, shadowed by rule 0",499,498,-1,499.0,950.2,451.20000000000005,0.0,0.0,0,1414.8380756378174,True,221.8761444091797,keep,
+3,2026-03-17T17:05:18.044383,remove_shadowed,"Remove rule 2, shadowed by rule 1",498,497,-1,950.2,950.3,0.09999999999990905,0.0,0.0,0,1731.010913848877,True,240.12017250061035,keep,
+4,2026-03-17T17:05:20.318783,remove_shadowed,"Remove rule 13, shadowed by rule 0",497,496,-1,950.3,950.4,0.10000000000002274,0.0,0.0,0,2044.240951538086,True,226.18389129638672,keep,
+5,2026-03-17T17:05:22.457827,remove_shadowed,"Remove rule 13, shadowed by rule 12",496,495,-1,950.4,950.5,0.10000000000002274,0.0,0.0,0,1911.1840724945068,True,224.49779510498047,keep,

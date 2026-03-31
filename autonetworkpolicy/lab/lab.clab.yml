@@ -1,0 +1,55 @@
+name: autonp-lab
+
+prefix: ""
+
+topology:
+  nodes:
+    fw:
+      kind: linux
+      image: autonp-node:latest
+      binds:
+        - ./nftables.conf:/etc/nftables.conf:ro
+      exec:
+        - nft -f /etc/nftables.conf
+      labels:
+        role: firewall
+
+    client:
+      kind: linux
+      image: autonp-node:latest
+      labels:
+        role: client
+
+    server:
+      kind: linux
+      image: autonp-node:latest
+      exec:
+        - iperf3 -s -D
+      labels:
+        role: server
+
+    attacker:
+      kind: linux
+      image: autonp-node:latest
+      labels:
+        role: attacker
+
+  links:
+    # Client subnet (192.168.10.0/24)
+    - endpoints: ["fw:eth1", "client:eth1"]
+    # Server subnet (192.168.20.0/24)
+    - endpoints: ["fw:eth2", "server:eth1"]
+    # Attacker subnet (192.168.30.0/24)
+    - endpoints: ["fw:eth3", "attacker:eth1"]
+
+  # Node configuration
+  defaults:
+    linux:
+      env:
+        PS1: "\\h# "
+
+  # Network addressing:
+  # fw: eth1=192.168.10.1/24, eth2=192.168.20.1/24, eth3=192.168.30.1/24
+  # client: eth1=192.168.10.10/24, gateway=192.168.10.1
+  # server: eth1=192.168.20.10/24, gateway=192.168.20.1
+  # attacker: eth1=192.168.30.10/24, gateway=192.168.30.1

@@ -1,0 +1,22 @@
+{
+  "experiment_name": "hybrid_sa_then_llm_enterprise",
+  "scenario": "enterprise_departments_hybrid",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-19T20:49:19.515299",
+  "end_time": "2026-03-19T21:00:16.696346",
+  "total_iterations": 15,
+  "successful_mutations": 2,
+  "failed_mutations": 0,
+  "rejected_mutations": 13,
+  "baseline_score": 235.0,
+  "best_score": 995.5071439299126,
+  "improvement_pct": 323.62006124677134,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 652327.4338245392,
+  "avg_iteration_time_ms": 43812.07027435303,
+  "mutation_type_distribution": {
+    "move_before": 14,
+    "swap": 1
+  },
+  "verification_pass_rate": 1.0
+}

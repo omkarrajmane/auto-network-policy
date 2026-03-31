@@ -1,0 +1,19 @@
+{
+  "k8s_step4_outcome": "D_STOP",
+  "enterprise_step4_outcome": "PROCEED_TO_PHASE2",
+  "enterprise_phase1": {
+    "traffic_aware_greedy_weighted_avg_depth": 92.7077,
+    "sa_start_weighted_avg_depth": 170.7872
+  },
+  "enterprise_phase2_llm": {
+    "llm_weighted_avg_depth": 121.7212,
+    "delta_vs_traffic_aware_greedy_percent": -31.3,
+    "delta_vs_sa_start_percent": 28.73
+  },
+  "final_outcome": "C_STOP",
+  "decision_rule": {
+    "A_PROCEED": "LLM >20% better than traffic_aware_greedy",
+    "B_PAUSE": "LLM 5-20% better than traffic_aware_greedy",
+    "C_STOP": "LLM <= traffic_aware_greedy"
+  }
+}

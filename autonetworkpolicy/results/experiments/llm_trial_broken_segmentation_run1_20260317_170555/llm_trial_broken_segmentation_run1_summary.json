@@ -1,0 +1,22 @@
+{
+  "experiment_name": "llm_trial_broken_segmentation_run1",
+  "scenario": "broken_segmentation",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-17T17:05:55.255553",
+  "end_time": "2026-03-17T17:06:08.140872",
+  "total_iterations": 5,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 0,
+  "baseline_score": 299.0,
+  "best_score": 970.6,
+  "improvement_pct": 224.6153846153846,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 12038.57159614563,
+  "avg_iteration_time_ms": 2577.064037322998,
+  "mutation_type_distribution": {
+    "remove_shadowed": 3,
+    "merge_adjacent": 2
+  },
+  "verification_pass_rate": 1.0
+}

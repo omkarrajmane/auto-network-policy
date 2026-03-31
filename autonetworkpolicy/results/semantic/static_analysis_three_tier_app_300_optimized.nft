@@ -1,0 +1,516 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.140.0/24 ip daddr 10.10.125.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.44.0/24 ip daddr 10.10.216.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.20.119.0/24 ip daddr 10.10.101.0/24 ip protocol 17 dport 27017 drop
+        # Tier: web -> database - drop port 27017
+        ip saddr 10.10.3.0/24 ip daddr 10.30.81.0/24 ip protocol 6 dport 27017 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.79.0/24 ip daddr 10.30.110.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 5 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.10.0.0/16 ip daddr 10.40.180.0/22 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.235.0/24 ip daddr 10.10.63.0/24 ip protocol 6 dport 443 drop
+        ip saddr 10.30.185.0/24 ip daddr 10.20.35.0/24 ip protocol 6 dport 5432 drop
+        # Tier: web -> app - accept port 8443
+        ip saddr 10.10.51.0/24 ip daddr 10.20.194.0/24 ip protocol 6 dport 8443 accept
+        # Tier: web -> database - drop port 3306 [Injected: misordered move]
+        ip saddr 10.10.83.0/24 ip daddr 10.30.189.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> database - drop port 27017
+        ip saddr 10.10.36.0/24 ip daddr 10.30.87.0/24 ip protocol 6 dport 27017 drop
+        # Injected: shadow candidate for original rule 12 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.10.0.0/16 ip daddr 10.20.0.0/16 accept
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.108.0/24 ip daddr 10.30.255.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> cache - drop port 6379
+        ip saddr 10.10.73.0/24 ip daddr 10.40.135.0/24 ip protocol 6 dport 6379 drop
+        # Tier: web -> database - drop port 5432 [Injected: misordered move]
+        ip saddr 10.10.205.0/24 ip daddr 10.30.137.0/24 ip protocol 6 dport 5432 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.219.0/24 ip daddr 10.30.204.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 19
+        ip saddr 10.10.128.0/20 ip daddr 10.40.0.0/16 drop
+        # Injected: shadow candidate for original rule -1 [Injected: misordered move]
+        ip saddr 10.10.128.0/18 ip daddr 10.40.0.0/14 drop
+        # Injected: duplicate candidate of original rule 177
+        ip saddr 10.30.46.0/24 ip daddr 10.20.151.0/24 ip protocol 6 dport 8443 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.174.0/24 ip daddr 10.30.57.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> cache - drop port 6379
+        ip saddr 10.10.1.0/24 ip daddr 10.40.134.0/24 ip protocol 6 dport 6379 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.152.0/24 ip daddr 10.10.101.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.30.157.0/24 ip daddr 10.20.29.0/24 ip protocol 6 dport 443 accept
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.64.0/24 ip daddr 10.10.65.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 28 [Injected: misordered move]
+        ip saddr 10.10.60.0/22 ip daddr 10.40.124.0/22 drop
+        ip saddr 10.10.169.0/24 ip daddr 10.10.121.0/24 ip protocol 6 dport 11211 accept
+        # Tier: web -> cache - drop port 11211
+        ip saddr 10.10.124.0/24 ip daddr 10.40.242.0/24 ip protocol 6 dport 11211 drop
+        # Injected: shadow candidate for original rule 32 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.10.208.0/20 ip daddr 10.10.0.0/16 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.50.0/24 ip daddr 10.10.31.0/24 ip protocol 6 dport 443 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.127.0/24 ip daddr 10.10.98.0/24 ip protocol 6 dport 80 drop
+        # Injected: duplicate candidate of original rule 297
+        ip saddr 10.40.80.0/24 ip daddr 10.30.89.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.226.0/24 ip daddr 10.10.50.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.47.0/24 ip daddr 10.10.121.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> cache - drop port 6379
+        ip saddr 10.10.109.0/24 ip daddr 10.40.205.0/24 ip protocol 6 dport 6379 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.199.0/24 ip daddr 10.10.135.0/24 ip protocol 6 dport 443 drop
+        # Injected: duplicate candidate of original rule 111
+        ip saddr 10.20.166.0/24 ip daddr 10.40.93.0/24 ip protocol 6 dport 11211 accept
+        # Tier: web -> cache - drop port 11211 [Injected: misordered move]
+        ip saddr 10.10.79.0/24 ip daddr 10.40.97.0/24 ip protocol 6 dport 11211 drop
+        # Tier: web -> web - drop port 80 [Injected: misordered move]
+        ip saddr 10.10.31.0/24 ip daddr 10.10.160.0/24 ip protocol 6 dport 80 drop
+        # Injected: misordered move
+        ip saddr 10.40.80.0/24 ip daddr 10.10.41.0/24 ip protocol 17 dport 443 accept
+        # Injected: duplicate candidate of original rule 283
+        ip saddr 10.40.42.0/24 ip daddr 10.30.217.0/24 ip protocol 6 dport 5432 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.41.0/24 ip daddr 10.10.214.0/24 ip protocol 6 dport 443 drop
+        # Tier: web -> database - drop port 5432
+        ip saddr 10.10.234.0/24 ip daddr 10.30.161.0/24 ip protocol 6 dport 5432 drop
+        # Injected: shadow candidate for original rule 48
+        ip saddr 10.10.144.0/20 ip daddr 10.30.0.0/16 ip protocol 6 dport 2286-3384 drop
+        # Injected: shadow candidate for original rule 49 [Injected: misordered move]
+        ip saddr 10.10.4.0/22 ip daddr 10.30.152.0/22 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.47.0/24 ip daddr 10.10.216.0/24 ip protocol 6 dport 443 drop
+        ip saddr 10.30.66.0/24 ip daddr 10.30.82.0/24 ip protocol 17 dport 27017 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.38.0/24 ip daddr 10.10.76.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.183.0/24 ip daddr 10.10.107.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> database - drop port 5432
+        ip saddr 10.10.208.0/24 ip daddr 10.30.79.0/24 ip protocol 6 dport 5432 drop
+        # Injected: shadow candidate for original rule 60
+        ip saddr 10.10.0.0/16 ip daddr 10.30.124.0/22 ip protocol 6 dport 2615-3791 drop
+        # Injected: shadow candidate for original rule 60 [Injected: misordered move]
+        ip saddr 10.10.208.0/20 ip daddr 10.30.112.0/20 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.195.0/24 ip daddr 10.10.19.0/24 ip protocol 6 dport 443 drop
+        # Tier: web -> database - drop port 27017 [Injected: misordered move]
+        ip saddr 10.10.179.0/24 ip daddr 10.30.204.0/24 ip protocol 6 dport 27017 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.14.0/24 ip daddr 10.30.59.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> database - drop port 27017
+        ip saddr 10.10.19.0/24 ip daddr 10.30.55.0/24 ip protocol 6 dport 27017 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.223.0/24 ip daddr 10.30.59.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 10.20.186.0/24 ip daddr 10.40.35.0/24 ip protocol 1 drop
+        # Tier: web -> web - drop port 443
+        ip saddr 10.10.153.0/24 ip daddr 10.10.158.0/24 ip protocol 6 dport 443 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.65.0/24 ip daddr 10.30.98.0/24 ip protocol 6 dport 3306 drop
+        # Tier: web -> cache - drop port 11211
+        ip saddr 10.10.89.0/24 ip daddr 10.40.154.0/24 ip protocol 6 dport 11211 drop
+        # Tier: web -> web - drop port 80
+        ip saddr 10.10.155.0/24 ip daddr 10.10.146.0/24 ip protocol 6 dport 80 drop
+        # Tier: web -> database - drop port 3306
+        ip saddr 10.10.238.0/24 ip daddr 10.30.226.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 75 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.20.0.0/16 ip daddr 10.40.32.0/20 accept
+        # Tier: app -> database - accept port 27017
+        ip saddr 10.20.47.0/24 ip daddr 10.30.120.0/24 ip protocol 6 dport 27017 accept
+        # Tier: app -> app - drop port 8080
+        ip saddr 10.20.75.0/24 ip daddr 10.20.12.0/24 ip protocol 6 dport 8080 drop
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.37.0/24 ip daddr 10.40.233.0/24 ip protocol 6 dport 11211 accept
+        # Injected: shadow candidate for original rule 79 [Injected: misordered move]
+        ip saddr 10.20.192.0/20 ip daddr 10.20.252.0/22 drop
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.54.0/24 ip daddr 10.10.217.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 81
+        ip saddr 10.20.16.0/20 ip daddr 10.40.112.0/20 ip protocol 6 dport 6222-6801 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.162.0/24 ip daddr 10.40.226.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.81.0/24 ip daddr 10.40.243.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> app - drop port 8080
+        ip saddr 10.20.141.0/24 ip daddr 10.20.248.0/24 ip protocol 6 dport 8080 drop
+        # Tier: app -> web - drop port 443
+        ip saddr 10.20.146.0/24 ip daddr 10.10.120.0/24 ip protocol 6 dport 443 drop
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.70.0/24 ip daddr 10.10.77.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 87 [Injected: misordered move]
+        ip saddr 10.20.0.0/16 ip daddr 10.20.0.0/16 drop
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.212.0/24 ip daddr 10.40.31.0/24 ip protocol 6 dport 6379 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.10.0/24 ip daddr 10.40.194.0/24 ip protocol 6 dport 11211 accept
+        ip saddr 10.30.152.0/24 ip daddr 10.40.214.0/24 ip protocol 6 dport 27017 accept
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.223.0/24 ip daddr 10.30.248.0/24 ip protocol 6 dport 5432 accept
+        # Injected: shadow candidate for original rule 92 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.20.84.0/22 ip daddr 10.40.224.0/20 accept
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.201.0/24 ip daddr 10.10.13.0/24 ip protocol 6 dport 80 drop
+        # Tier: app -> cache - accept port 11211 [Injected: misordered move]
+        ip saddr 10.20.142.0/24 ip daddr 10.40.215.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> database - accept port 3306
+        ip saddr 10.20.108.0/24 ip daddr 10.30.232.0/24 ip protocol 6 dport 3306 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.9.0/24 ip daddr 10.40.26.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.20.0/24 ip daddr 10.10.15.0/24 ip protocol 6 dport 80 drop
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.78.0/24 ip daddr 10.10.122.0/24 ip protocol 6 dport 80 drop
+        # Tier: app -> web - drop port 443
+        ip saddr 10.20.111.0/24 ip daddr 10.10.238.0/24 ip protocol 6 dport 443 drop
+        # Tier: app -> web - drop port 443
+        ip saddr 10.20.159.0/24 ip daddr 10.10.192.0/24 ip protocol 6 dport 443 drop
+        # Tier: app -> database - accept port 3306
+        ip saddr 10.20.61.0/24 ip daddr 10.30.21.0/24 ip protocol 6 dport 3306 accept
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.35.0/24 ip daddr 10.30.174.0/24 ip protocol 6 dport 5432 accept
+        # Injected: shadow candidate for original rule 106 [Injected: misordered move]
+        ip saddr 10.20.48.0/20 ip daddr 10.40.220.0/22 ip protocol 6 dport 10768-12782 accept
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.78.0/24 ip daddr 10.40.222.0/24 ip protocol 6 dport 6379 accept
+        # Tier: app -> database - accept port 3306
+        ip saddr 10.20.247.0/24 ip daddr 10.30.238.0/24 ip protocol 6 dport 3306 accept
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.165.0/24 ip daddr 10.30.125.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.124.0/24 ip daddr 10.40.237.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> database - accept port 27017
+        ip saddr 10.20.174.0/24 ip daddr 10.30.143.0/24 ip protocol 6 dport 27017 accept
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.5.0/24 ip daddr 10.30.97.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.250.0/24 ip daddr 10.40.123.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.229.0/24 ip daddr 10.40.8.0/24 ip protocol 6 dport 6379 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.124.0/24 ip daddr 10.40.156.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> database - accept port 3306
+        ip saddr 10.20.217.0/24 ip daddr 10.30.169.0/24 ip protocol 6 dport 3306 accept
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.156.0/24 ip daddr 10.30.128.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.141.0/24 ip daddr 10.40.144.0/24 ip protocol 6 dport 6379 accept
+        # Injected: shadow candidate for original rule 121 [Injected: misordered move]
+        ip saddr 10.20.0.0/16 ip daddr 10.30.184.0/22 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.245.0/24 ip daddr 10.40.225.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.129.0/24 ip daddr 10.10.244.0/24 ip protocol 6 dport 80 drop
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.43.0/24 ip daddr 10.30.127.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.115.0/24 ip daddr 10.40.194.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> database - accept port 27017
+        ip saddr 10.20.219.0/24 ip daddr 10.30.156.0/24 ip protocol 6 dport 27017 accept
+        # Tier: app -> web - drop port 443
+        ip saddr 10.20.106.0/24 ip daddr 10.10.108.0/24 ip protocol 6 dport 443 drop
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.230.0/24 ip daddr 10.40.240.0/24 ip protocol 6 dport 11211 accept
+        ip saddr 10.30.144.0/24 ip daddr 10.40.36.0/24 ip protocol 6 dport 6379 accept
+        # Injected: misordered move
+        ip saddr 10.20.157.0/24 ip daddr 10.30.224.0/24 ip protocol 6 dport 6379 drop
+        # Tier: app -> database - accept port 5432
+        ip saddr 10.20.128.0/24 ip daddr 10.30.13.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> web - drop port 80
+        ip saddr 10.20.137.0/24 ip daddr 10.10.20.0/24 ip protocol 6 dport 80 drop
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.142.0/24 ip daddr 10.40.92.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> cache - accept port 11211 [Injected: misordered move]
+        ip saddr 10.20.46.0/24 ip daddr 10.40.240.0/24 ip protocol 6 dport 11211 accept
+        # Tier: app -> database - accept port 3306
+        ip saddr 10.20.53.0/24 ip daddr 10.30.82.0/24 ip protocol 6 dport 3306 accept
+        # Tier: app -> database - accept port 5432 [Injected: misordered move]
+        ip saddr 10.20.129.0/24 ip daddr 10.30.165.0/24 ip protocol 6 dport 5432 accept
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.147.0/24 ip daddr 10.40.205.0/24 ip protocol 6 dport 6379 accept
+        # Tier: app -> cache - accept port 11211
+        ip saddr 10.20.0.0/24 ip daddr 10.40.236.0/24 ip protocol 6 dport 11211 accept
+        ip saddr 10.30.255.0/24 ip daddr 10.40.26.0/24 ip protocol 6 dport 27017 accept
+        # Tier: app -> cache - accept port 6379
+        ip saddr 10.20.248.0/24 ip daddr 10.40.62.0/24 ip protocol 6 dport 6379 accept
+        # Tier: app -> web - drop port 443
+        ip saddr 10.20.115.0/24 ip daddr 10.10.58.0/24 ip protocol 6 dport 443 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.241.0/24 ip daddr 10.40.124.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.97.0/24 ip daddr 10.40.69.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> app - drop port 8443 [Injected: misordered move]
+        ip saddr 10.30.169.0/24 ip daddr 10.20.51.0/24 ip protocol 6 dport 8443 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.174.0/24 ip daddr 10.40.136.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.250.0/24 ip daddr 10.30.76.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.170.0/24 ip daddr 10.30.193.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.122.0/24 ip daddr 10.20.196.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.22.0/24 ip daddr 10.40.162.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.197.0/24 ip daddr 10.40.77.0/24 ip protocol 6 dport 11211 drop
+        ip saddr 10.40.7.0/24 ip daddr 10.20.209.0/24 ip protocol 17 dport 3306 accept
+        # Tier: database -> database - drop port 27017
+        ip saddr 10.30.173.0/24 ip daddr 10.30.203.0/24 ip protocol 6 dport 27017 drop
+        ip saddr 10.30.194.0/24 ip daddr 10.30.249.0/24 ip protocol 17 dport 80 accept
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.116.0/24 ip daddr 10.30.46.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.227.0/24 ip daddr 10.10.85.0/24 ip protocol 6 dport 443 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.166.0/24 ip daddr 10.10.28.0/24 ip protocol 6 dport 443 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.74.0/24 ip daddr 10.40.125.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.87.0/24 ip daddr 10.20.89.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 167
+        ip saddr 10.30.120.0/22 ip daddr 10.40.240.0/20 drop
+        # Tier: database -> database - drop port 27017
+        ip saddr 10.30.235.0/24 ip daddr 10.30.130.0/24 ip protocol 6 dport 27017 drop
+        ip saddr 10.40.147.0/24 ip daddr 10.20.37.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.128.0/24 ip daddr 10.40.233.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.247.0/24 ip daddr 10.40.54.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> database - drop port 5432
+        ip saddr 10.30.151.0/24 ip daddr 10.30.151.0/24 ip protocol 6 dport 5432 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.140.0/24 ip daddr 10.40.4.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.146.0/24 ip daddr 10.40.117.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.128.0/24 ip daddr 10.20.70.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 176
+        ip saddr 10.30.0.0/16 ip daddr 10.10.224.0/22 ip protocol 6 dport 48-514 drop
+        # Tier: database -> app - drop port 8443
+        ip saddr 10.30.102.0/24 ip daddr 10.20.67.0/24 ip protocol 6 dport 8443 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.84.0/24 ip daddr 10.30.131.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.173.0/24 ip daddr 10.30.58.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 181
+        ip saddr 10.30.0.0/16 ip daddr 10.20.192.0/20 ip protocol 6 dport 8359-10380 drop
+        ip saddr 10.40.7.0/24 ip daddr 10.30.63.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.55.0/24 ip daddr 10.30.119.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 10.30.113.0/24 ip daddr 10.10.237.0/24 ip protocol 1 drop
+        # Tier: database -> web - drop port 80
+        ip saddr 10.30.71.0/24 ip daddr 10.10.23.0/24 ip protocol 6 dport 80 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.59.0/24 ip daddr 10.40.49.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> app - drop port 8443
+        ip saddr 10.30.198.0/24 ip daddr 10.20.232.0/24 ip protocol 6 dport 8443 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.79.0/24 ip daddr 10.40.212.0/24 ip protocol 6 dport 6379 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 10.30.128.0/20 ip daddr 10.40.0.0/14 ip protocol 6 dport 11018-12355 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 10.30.128.0/20 ip daddr 10.40.16.0/20 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.120.0/24 ip daddr 10.40.185.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.183.0/24 ip daddr 10.30.31.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> web - drop port 80
+        ip saddr 10.30.232.0/24 ip daddr 10.10.46.0/24 ip protocol 6 dport 80 drop
+        # Tier: database -> web - drop port 80
+        ip saddr 10.30.25.0/24 ip daddr 10.10.170.0/24 ip protocol 6 dport 80 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.35.0/24 ip daddr 10.20.106.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.168.0/24 ip daddr 10.20.75.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.66.0/24 ip daddr 10.20.128.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 10.30.64.0/20 ip daddr 10.0.0.0/8 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.165.0/24 ip daddr 10.20.8.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.215.0/24 ip daddr 10.20.58.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> database - drop port 27017
+        ip saddr 10.30.55.0/24 ip daddr 10.30.231.0/24 ip protocol 6 dport 27017 drop
+        # Tier: database -> web - drop port 80
+        ip saddr 10.30.154.0/24 ip daddr 10.10.234.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.40.205.0/24 ip daddr 10.40.55.0/24 ip protocol 6 dport 11211 accept
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.195.0/24 ip daddr 10.30.150.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.50.0/24 ip daddr 10.40.58.0/24 ip protocol 6 dport 6379 drop
+        # Injected: shadow candidate for original rule 206
+        ip saddr 10.30.208.0/20 ip daddr 10.20.0.0/16 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.160.0/24 ip daddr 10.10.218.0/24 ip protocol 6 dport 443 drop
+        ip saddr 10.10.47.0/24 ip daddr 10.40.49.0/24 ip protocol 17 dport 8080 accept
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.62.0/24 ip daddr 10.30.210.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.26.0/24 ip daddr 10.40.147.0/24 ip protocol 6 dport 11211 drop
+        # Injected: duplicate candidate of original rule 215
+        ip saddr 10.30.173.0/24 ip daddr 10.30.179.0/24 ip protocol 6 dport 5432 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.188.0/24 ip daddr 10.30.58.0/24 ip protocol 6 dport 3306 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.13.0/24 ip daddr 10.40.136.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> app - drop port 8080
+        ip saddr 10.30.205.0/24 ip daddr 10.20.35.0/24 ip protocol 6 dport 8080 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.46.0/24 ip daddr 10.10.110.0/24 ip protocol 6 dport 443 drop
+        # Tier: database -> database - drop port 3306
+        ip saddr 10.30.80.0/24 ip daddr 10.30.189.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 219 [Injected: misordered move]
+        ip saddr 10.30.24.0/22 ip daddr 10.10.76.0/22 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.41.0/24 ip daddr 10.10.139.0/24 ip protocol 6 dport 443 drop
+        # Tier: database -> cache - drop port 11211
+        ip saddr 10.30.226.0/24 ip daddr 10.40.212.0/24 ip protocol 6 dport 11211 drop
+        # Tier: database -> web - drop port 80
+        ip saddr 10.30.176.0/24 ip daddr 10.10.220.0/24 ip protocol 6 dport 80 drop
+        # Tier: database -> cache - drop port 6379
+        ip saddr 10.30.157.0/24 ip daddr 10.40.23.0/24 ip protocol 6 dport 6379 drop
+        # Tier: database -> web - drop port 443
+        ip saddr 10.30.3.0/24 ip daddr 10.10.104.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.130.0/24 ip daddr 10.20.148.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> cache - drop port 6379
+        ip saddr 10.40.220.0/24 ip daddr 10.40.89.0/24 ip protocol 6 dport 6379 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.181.0/24 ip daddr 10.20.36.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.223.0/24 ip daddr 10.10.9.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 229
+        ip saddr 10.40.0.0/16 ip daddr 10.30.0.0/16 ip protocol 6 dport 26339-28369 drop
+        # Injected: shadow candidate for original rule 230
+        ip saddr 10.40.48.0/20 ip daddr 10.30.204.0/22 drop
+        # Injected: duplicate candidate of original rule 306
+        ip saddr 10.30.93.0/24 ip daddr 10.30.66.0/24 ip protocol 6 dport 3306 drop
+        # Tier: cache -> app - drop port 8080
+        ip saddr 10.40.235.0/24 ip daddr 10.20.185.0/24 ip protocol 6 dport 8080 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.124.0/24 ip daddr 10.10.223.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> cache - drop port 6379
+        ip saddr 10.40.158.0/24 ip daddr 10.40.173.0/24 ip protocol 6 dport 6379 drop
+        # Tier: cache -> app - drop port 8080
+        ip saddr 10.40.39.0/24 ip daddr 10.20.58.0/24 ip protocol 6 dport 8080 drop
+        # Tier: cache -> database - drop port 5432
+        ip saddr 10.40.179.0/24 ip daddr 10.30.75.0/24 ip protocol 6 dport 5432 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.90.0/24 ip daddr 10.10.252.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> cache - drop port 6379
+        ip saddr 10.40.165.0/24 ip daddr 10.40.161.0/24 ip protocol 6 dport 6379 drop
+        # Tier: cache -> cache - drop port 11211
+        ip saddr 10.40.226.0/24 ip daddr 10.40.155.0/24 ip protocol 6 dport 11211 drop
+        # Tier: cache -> database - drop port 3306
+        ip saddr 10.40.37.0/24 ip daddr 10.30.158.0/24 ip protocol 6 dport 3306 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.188.0/24 ip daddr 10.10.146.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.196.0/24 ip daddr 10.10.236.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> app - drop port 8080
+        ip saddr 10.40.164.0/24 ip daddr 10.20.243.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 244
+        ip saddr 10.40.48.0/20 ip daddr 10.40.0.0/16 ip protocol 6 dport 5445-7771 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.20.0/24 ip daddr 10.20.126.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.186.0/24 ip daddr 10.20.190.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> database - drop port 5432
+        ip saddr 10.40.26.0/24 ip daddr 10.30.171.0/24 ip protocol 6 dport 5432 drop
+        # Tier: cache -> cache - drop port 6379
+        ip saddr 10.40.145.0/24 ip daddr 10.40.129.0/24 ip protocol 6 dport 6379 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.179.0/24 ip daddr 10.20.158.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.158.0/24 ip daddr 10.10.192.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.216.0/24 ip daddr 10.10.185.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.109.0/24 ip daddr 10.20.174.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.79.0/24 ip daddr 10.20.39.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.19.0/24 ip daddr 10.10.172.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 255
+        ip saddr 10.40.80.0/20 ip daddr 10.20.0.0/16 ip protocol 6 dport 7204-9856 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.210.0/24 ip daddr 10.10.186.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> cache - drop port 11211
+        ip saddr 10.40.99.0/24 ip daddr 10.40.188.0/24 ip protocol 6 dport 11211 drop
+        # Injected: shadow candidate for original rule 259
+        ip saddr 10.40.192.0/20 ip daddr 10.30.212.0/22 ip protocol 6 dport 4640-6545 drop
+        # Injected: shadow candidate for original rule 260 [Injected: misordered move]
+        ip saddr 10.40.128.0/22 ip daddr 10.20.24.0/22 ip protocol 6 dport 8339-9399 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.63.0/24 ip daddr 10.10.145.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> database - drop port 3306
+        ip saddr 10.40.230.0/24 ip daddr 10.30.75.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 10.20.230.0/24 ip daddr 10.30.13.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.191.0/24 ip daddr 10.10.114.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.171.0/24 ip daddr 10.10.74.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 266
+        ip saddr 10.40.68.0/22 ip daddr 10.40.228.0/22 ip protocol 6 dport 129-1074 accept
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.216.0/24 ip daddr 10.20.56.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.24.0/24 ip daddr 10.10.122.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> cache - drop port 11211
+        ip saddr 10.40.32.0/24 ip daddr 10.40.56.0/24 ip protocol 6 dport 11211 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.123.0/24 ip daddr 10.10.73.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> database - drop port 5432
+        ip saddr 10.40.123.0/24 ip daddr 10.30.213.0/24 ip protocol 6 dport 5432 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.184.0/24 ip daddr 10.10.34.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> cache - drop port 11211
+        ip saddr 10.40.22.0/24 ip daddr 10.40.198.0/24 ip protocol 6 dport 11211 drop
+        # Injected: shadow candidate for original rule 274
+        ip saddr 10.40.0.0/16 ip daddr 10.10.32.0/22 ip protocol 6 dport 291-2470 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.170.0/24 ip daddr 10.10.68.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.69.0/24 ip daddr 10.20.32.0/24 ip protocol 6 dport 8443 drop
+        # Tier: cache -> cache - drop port 6379
+        ip saddr 10.40.129.0/24 ip daddr 10.40.18.0/24 ip protocol 6 dport 6379 drop
+        # Tier: cache -> web - drop port 80
+        ip saddr 10.40.169.0/24 ip daddr 10.10.139.0/24 ip protocol 6 dport 80 drop
+        # Tier: cache -> cache - drop port 11211
+        ip saddr 10.40.204.0/24 ip daddr 10.40.225.0/24 ip protocol 6 dport 11211 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.254.0/24 ip daddr 10.20.254.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 284
+        ip saddr 10.40.144.0/20 ip daddr 10.20.160.0/20 drop
+        ip saddr 10.30.156.0/24 ip daddr 10.40.218.0/24 ip protocol 6 dport 11211 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.38.0/24 ip daddr 10.10.207.0/24 ip protocol 6 dport 443 drop
+        # Tier: cache -> app - drop port 8443
+        ip saddr 10.40.15.0/24 ip daddr 10.20.73.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 289 [Injected: misordered move]
+        ip saddr 10.10.0.0/16 ip daddr 10.30.0.0/16 ip protocol 6 dport 56-1148 accept
+        # Tier: cache -> database - drop port 5432
+        ip saddr 10.40.190.0/24 ip daddr 10.30.227.0/24 ip protocol 6 dport 5432 drop
+        # Tier: cache -> web - drop port 443
+        ip saddr 10.40.13.0/24 ip daddr 10.10.95.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 10.32.0.0/12 ip daddr 10.0.0.0/8 drop
+        # Policy: Tier app -> database - accept port 27017 [Injected: misordered move]
+        ip saddr 10.20.158.0/24 ip daddr 10.30.203.0/24 ip protocol 6 dport 27017 accept
+        # Policy: Tier app -> cache - accept port 11211
+        ip saddr 10.20.245.0/24 ip daddr 10.40.210.0/24 ip protocol 6 dport 11211 accept
+        # Policy: Tier web -> database - drop port 3306
+        ip saddr 10.10.37.0/24 ip daddr 10.30.64.0/24 ip protocol 6 dport 3306 drop
+        # Policy: Tier web -> database - drop port 3306
+        ip saddr 10.10.37.0/24 ip daddr 10.30.230.0/24 ip protocol 6 dport 3306 drop
+        # Policy: Tier app -> database - drop port 27017
+        ip saddr 10.20.176.0/24 ip daddr 10.30.65.0/24 ip protocol 6 dport 27017 drop
+    }
+}

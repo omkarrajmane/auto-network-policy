@@ -1,0 +1,693 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.126.0/24 ip daddr 10.255.72.0/24 ip protocol 6 dport 53 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.165.0/24 ip daddr 172.16.250.0/24 ip protocol 6 dport 22 drop
+        ip saddr 10.119.31.0/24 ip daddr 172.16.101.0/24 ip protocol 17 dport 3306 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.123.11.0/24 ip daddr 10.255.243.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - accept to servers [Injected: misordered move]
+        ip saddr 10.173.87.0/24 ip daddr 192.168.203.0/24 ip protocol 17 dport 53 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.157.0/24 ip daddr 192.168.133.0/24 ip protocol 6 dport 8443 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.193.0/24 ip daddr 172.16.40.0/24 ip protocol 6 dport 8080 drop
+        ip saddr 172.16.99.0/24 ip daddr 192.168.179.0/24 ip protocol 17 dport 80 accept
+        # Zone: internal (trust=medium) - drop to dmz [Injected: misordered move]
+        ip saddr 10.27.114.0/24 ip daddr 172.16.77.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.83.0/24 ip daddr 192.168.189.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.75.242.0/24 ip daddr 192.168.33.0/24 ip protocol 6 dport 80 accept
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.138.0/24 ip daddr 10.255.112.0/24 ip protocol 6 dport 8443 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.117.0/24 ip daddr 172.16.16.0/24 ip protocol 6 dport 8443 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.247.0/24 ip daddr 192.168.125.0/24 ip protocol 6 dport 3306 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.139.0/24 ip daddr 10.230.13.0/24 ip protocol 6 dport 80 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.167.0/24 ip daddr 10.163.22.0/24 ip protocol 6 dport 80 accept
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.252.0/24 ip daddr 10.46.139.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.81.0/24 ip daddr 10.216.37.0/24 ip protocol 17 dport 53 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.128.0/24 ip daddr 10.255.5.0/24 ip protocol 17 dport 53 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.41.145.0/24 ip daddr 192.168.80.0/24 ip protocol 6 dport 443 accept
+        # Injected: duplicate candidate of original rule 191
+        ip saddr 10.67.123.0/24 ip daddr 172.16.7.0/24 ip protocol 6 dport 8443 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.97.0/24 ip daddr 192.168.81.0/24 ip protocol 6 dport 5432 accept
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.55.213.0/24 ip daddr 192.168.231.0/24 ip protocol 6 dport 443 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.226.0/24 ip daddr 172.16.50.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.43.0/24 ip daddr 172.16.248.0/24 ip protocol 6 dport 53 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.201.0/24 ip daddr 172.16.13.0/24 ip protocol 17 dport 53 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.206.0/24 ip daddr 10.61.97.0/24 ip protocol 6 dport 443 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.74.0/24 ip daddr 10.8.77.0/24 ip protocol 6 dport 8080 accept
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.156.253.0/24 ip daddr 192.168.128.0/24 ip protocol 6 dport 443 accept
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.3.0/24 ip daddr 192.168.81.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.50.199.0/24 ip daddr 10.255.58.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.210.0/24 ip daddr 10.255.209.0/24 ip protocol 6 dport 53 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.50.0/24 ip daddr 172.16.31.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.127.0/24 ip daddr 172.16.98.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.141.145.0/24 ip daddr 10.255.144.0/24 ip protocol 6 dport 53 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.185.177.0/24 ip daddr 10.50.222.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 270
+        ip saddr 192.168.96.0/20 ip daddr 172.16.20.0/22 ip protocol 6 dport 7887-10132 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.109.0/24 ip daddr 10.255.205.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.10.0/24 ip daddr 10.255.166.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.79.0/24 ip daddr 10.255.97.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 303
+        ip saddr 10.255.0.0/16 ip daddr 172.16.0.0/16 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.211.0/24 ip daddr 10.173.136.0/24 ip protocol 6 dport 5432 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.141.0/24 ip daddr 10.96.128.0/24 ip protocol 6 dport 53 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.46.183.0/24 ip daddr 10.255.240.0/24 ip protocol 6 dport 8443 drop
+        ip saddr 192.168.167.0/24 ip daddr 10.255.89.0/24 ip protocol 6 dport 8443 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.37.0/24 ip daddr 172.16.109.0/24 ip protocol 6 dport 8080 drop
+        # Zone: internal (trust=medium) - drop to internal [Injected: misordered move]
+        ip saddr 10.215.136.0/24 ip daddr 10.58.48.0/24 ip protocol 17 dport 53 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.40.0/24 ip daddr 192.168.119.0/24 ip protocol 17 dport 53 drop
+        # Injected: shadow candidate for original rule 49 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 172.16.64.0/20 ip daddr 172.16.128.0/20 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.139.0/24 ip daddr 10.144.66.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.84.0/24 ip daddr 10.255.135.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.187.70.0/24 ip daddr 10.255.46.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.47.0/24 ip daddr 172.16.216.0/24 ip protocol 6 dport 8080 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.68.0/24 ip daddr 10.255.239.0/24 ip protocol 6 dport 8080 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.176.0/24 ip daddr 192.168.204.0/24 ip protocol 6 dport 80 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.39.0/24 ip daddr 10.151.114.0/24 ip protocol 6 dport 53 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.127.0/24 ip daddr 10.52.161.0/24 ip protocol 6 dport 8443 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.79.0/24 ip daddr 10.255.121.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.251.84.0/24 ip daddr 10.52.134.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.130.0/24 ip daddr 10.22.185.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.195.0/24 ip daddr 172.16.19.0/24 ip protocol 6 dport 5432 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.164.0/24 ip daddr 10.243.133.0/24 ip protocol 6 dport 80 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.15.0/24 ip daddr 10.73.26.0/24 ip protocol 6 dport 5432 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.88.0/24 ip daddr 10.255.227.0/24 ip protocol 17 dport 53 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.139.99.0/24 ip daddr 10.255.252.0/24 ip protocol 6 dport 5432 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.78.0/24 ip daddr 10.255.232.0/24 ip protocol 6 dport 8443 accept
+        ip saddr 10.255.176.0/24 ip daddr 192.168.223.0/24 ip protocol 6 dport 53 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.187.0/24 ip daddr 192.168.206.0/24 ip protocol 6 dport 8443 accept
+        ip saddr 10.186.123.0/24 ip daddr 10.255.35.0/24 ip protocol 1 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.216.0/24 ip daddr 10.56.237.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.65.0/24 ip daddr 192.168.98.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.89.0/24 ip daddr 10.255.154.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.155.0/24 ip daddr 172.16.146.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.238.0/24 ip daddr 192.168.226.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.86.0/24 ip daddr 10.255.43.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.58.0/24 ip daddr 10.83.217.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.75.0/24 ip daddr 10.12.129.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.157.0/24 ip daddr 172.16.186.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.153.0/24 ip daddr 172.16.158.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.53.142.0/24 ip daddr 192.168.82.0/24 ip protocol 6 dport 8443 accept
+        # Injected: misordered move
+        ip saddr 172.16.169.0/24 ip daddr 172.16.121.0/24 ip protocol 6 dport 5432 accept
+        ip saddr 192.168.66.0/24 ip daddr 192.168.82.0/24 ip protocol 17 dport 3306 accept
+        ip saddr 172.16.120.0/24 ip daddr 192.168.185.0/24 ip protocol 6 dport 22 accept
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.211.0/24 ip daddr 10.12.176.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.70.0/24 ip daddr 172.16.77.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to internal [Injected: misordered move]
+        ip saddr 10.194.192.0/24 ip daddr 10.230.169.0/24 ip protocol 6 dport 5432 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.192.0/24 ip daddr 10.78.250.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.212.0/24 ip daddr 10.255.31.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.10.0/24 ip daddr 10.255.194.0/24 ip protocol 6 dport 5432 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.89.0/24 ip daddr 10.207.156.0/24 ip protocol 6 dport 3306 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.220.0/24 ip daddr 10.255.89.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.21.7.0/24 ip daddr 172.16.177.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.84.0/24 ip daddr 10.255.239.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 51
+        ip saddr 172.16.0.0/16 ip daddr 10.250.0.0/16 drop
+        # Injected: duplicate candidate of original rule 230
+        ip saddr 192.168.90.0/24 ip daddr 172.16.252.0/24 ip protocol 6 dport 5432 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.227.0/24 ip daddr 10.145.226.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.142.0/24 ip daddr 10.255.215.0/24 ip protocol 6 dport 8080 drop
+        # Injected: duplicate candidate of original rule 311
+        ip saddr 10.255.234.0/24 ip daddr 10.110.39.0/24 ip protocol 6 dport 22 accept
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.93.0/24 ip daddr 10.255.25.0/24 ip protocol 6 dport 8080 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.5.50.0/24 ip daddr 192.168.97.0/24 ip protocol 6 dport 53 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.111.0/24 ip daddr 172.16.238.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.47.0/24 ip daddr 192.168.120.0/24 ip protocol 6 dport 8080 drop
+        # Policy: Zone dmz -> internal - drop
+        ip saddr 172.16.255.0/24 ip daddr 10.222.41.0/24 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.38.233.0/24 ip daddr 10.124.86.0/24 ip protocol 17 dport 53 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.142.0/24 ip daddr 10.152.212.0/24 ip protocol 6 dport 443 accept
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.174.181.0/24 ip daddr 172.16.6.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.221.246.0/24 ip daddr 172.16.185.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - drop to management [Injected: misordered move]
+        ip saddr 10.17.21.0/24 ip daddr 10.255.186.0/24 ip protocol 6 dport 80 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.26.0/24 ip daddr 172.16.79.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.237.238.0/24 ip daddr 10.194.10.0/24 ip protocol 6 dport 8443 drop
+        ip saddr 192.168.93.0/24 ip daddr 10.255.108.0/24 ip protocol 6 dport 8080 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.140.0/24 ip daddr 192.168.147.0/24 ip protocol 17 dport 53 accept
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.208.0/24 ip daddr 10.243.142.0/24 ip protocol 6 dport 5432 accept
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.47.164.0/24 ip daddr 172.16.150.0/24 ip protocol 6 dport 443 drop
+        # Injected: misordered move [Injected: misordered move]
+        ip saddr 172.16.117.0/24 ip daddr 10.3.174.0/24 ip protocol 6 dport 22 accept
+        # Zone: internal (trust=medium) - accept to servers [Injected: misordered move]
+        ip saddr 10.217.219.0/24 ip daddr 192.168.169.0/24 ip protocol 6 dport 8443 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.156.199.0/24 ip daddr 10.188.240.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.216.0/24 ip daddr 10.93.242.0/24 ip protocol 6 dport 8080 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.91.223.0/24 ip daddr 192.168.154.0/24 ip protocol 6 dport 22 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.140.114.0/24 ip daddr 10.23.77.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.31.0/24 ip daddr 172.16.160.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.141.0/24 ip daddr 10.248.29.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.255.43.0/24 ip daddr 10.149.110.0/24 ip protocol 6 dport 8080 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.20.153.0/24 ip daddr 192.168.89.0/24 ip protocol 6 dport 5432 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.22.88.0/24 ip daddr 10.255.162.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.16.192.0/24 ip daddr 192.168.189.0/24 ip protocol 6 dport 443 accept
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.35.0/24 ip daddr 192.168.125.0/24 ip protocol 6 dport 8443 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.176.0/24 ip daddr 192.168.135.0/24 ip protocol 6 dport 22 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.43.156.0/24 ip daddr 192.168.127.0/24 ip protocol 17 dport 53 accept
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.154.111.0/24 ip daddr 172.16.234.0/24 ip protocol 6 dport 22 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.232.118.0/24 ip daddr 192.168.36.0/24 ip protocol 6 dport 443 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.217.171.0/24 ip daddr 10.58.195.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 256
+        ip saddr 192.168.0.0/16 ip daddr 172.16.112.0/20 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.248.0/24 ip daddr 10.255.14.0/24 ip protocol 6 dport 3306 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.188.0/24 ip daddr 172.16.146.0/24 ip protocol 6 dport 53 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.184.0/24 ip daddr 172.16.34.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.134.0/24 ip daddr 172.16.133.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.166.20.0/24 ip daddr 172.16.28.0/24 ip protocol 6 dport 8080 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.129.68.0/24 ip daddr 172.16.244.0/24 ip protocol 6 dport 53 drop
+        # Injected: shadow candidate for original rule 78 [Injected: misordered move]
+        ip saddr 172.16.52.0/22 ip daddr 172.16.216.0/22 ip protocol 6 dport 156-916 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.219.0/24 ip daddr 192.168.204.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.115.11.0/24 ip daddr 172.16.58.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.234.0/24 ip daddr 192.168.161.0/24 ip protocol 6 dport 53 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.151.124.0/24 ip daddr 192.168.151.0/24 ip protocol 6 dport 22 accept
+        # Injected: shadow candidate for original rule 143 [Injected: misordered move]
+        ip saddr 10.147.120.0/22 ip daddr 10.224.80.0/22 ip protocol 6 dport 5001-6760 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.81.22.0/24 ip daddr 10.159.26.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.159.0/24 ip daddr 10.204.72.0/24 ip protocol 6 dport 8443 drop
+        # Injected: duplicate candidate of original rule 250
+        ip saddr 192.168.236.0/24 ip daddr 10.255.144.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 215
+        ip saddr 192.168.224.0/20 ip daddr 10.255.208.0/20 ip protocol 6 dport 7501-9296 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.241.198.0/24 ip daddr 10.255.124.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.97.151.0/24 ip daddr 10.255.69.0/24 ip protocol 17 dport 53 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.78.0/24 ip daddr 172.16.122.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.246.180.0/24 ip daddr 192.168.151.0/24 ip protocol 6 dport 8443 accept
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.204.0/24 ip daddr 10.168.17.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.61.0/24 ip daddr 10.255.126.0/24 ip protocol 6 dport 443 drop
+        # Injected: misordered move
+        ip saddr 10.255.7.0/24 ip daddr 10.209.232.0/24 ip protocol 17 dport 80 accept
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.80.37.0/24 ip daddr 172.16.1.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.154.184.0/24 ip daddr 10.255.209.0/24 ip protocol 6 dport 53 drop
+        # Injected: shadow candidate for original rule 154 [Injected: misordered move]
+        ip saddr 10.197.160.0/20 ip daddr 10.255.64.0/20 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.177.0/24 ip daddr 10.145.110.0/24 ip protocol 17 dport 53 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.181.0/24 ip daddr 10.36.231.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.179.0/24 ip daddr 10.255.156.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.162.33.0/24 ip daddr 10.255.249.0/24 ip protocol 6 dport 22 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.147.35.0/24 ip daddr 10.116.121.0/24 ip protocol 17 dport 53 drop
+        # Injected: shadow candidate for original rule 160
+        ip saddr 10.227.0.0/16 ip daddr 172.16.84.0/22 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 10.128.0.0/12 ip daddr 10.255.80.0/20 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.74.136.0/24 ip daddr 10.255.125.0/24 ip protocol 6 dport 3306 drop
+        # Injected: shadow candidate for original rule 209
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 drop
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.236.136.0/24 ip daddr 172.16.211.0/24 ip protocol 6 dport 22 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.164.0/24 ip daddr 10.144.237.0/24 ip protocol 6 dport 3306 accept
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.235.76.0/24 ip daddr 192.168.130.0/24 ip protocol 6 dport 22 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.147.68.0/24 ip daddr 10.255.80.0/24 ip protocol 17 dport 53 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.66.142.0/24 ip daddr 10.128.85.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.36.0/24 ip daddr 192.168.87.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 142
+        ip saddr 10.255.0.0/16 ip daddr 192.168.224.0/22 ip protocol 6 dport 19-308 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.90.46.0/24 ip daddr 10.255.138.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - drop to management [Injected: misordered move]
+        ip saddr 10.146.136.0/24 ip daddr 10.255.117.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.140.136.0/24 ip daddr 10.255.4.0/24 ip protocol 6 dport 22 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.128.82.0/24 ip daddr 10.70.7.0/24 ip protocol 6 dport 53 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.87.8.0/24 ip daddr 10.89.162.0/24 ip protocol 17 dport 53 drop
+        # Zone: internal (trust=medium) - accept to servers [Injected: misordered move]
+        ip saddr 10.250.178.0/24 ip daddr 192.168.76.0/24 ip protocol 6 dport 5432 accept
+        # Injected: shadow candidate for original rule 203
+        ip saddr 192.168.208.0/20 ip daddr 172.16.48.0/20 ip protocol 6 dport 8376-9561 drop
+        # Injected: shadow candidate for original rule 176
+        ip saddr 10.38.0.0/16 ip daddr 10.255.72.0/22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.134.0/24 ip daddr 172.16.91.0/24 ip protocol 17 dport 53 drop
+        ip saddr 172.16.232.0/24 ip daddr 192.168.134.0/24 ip protocol 6 dport 8443 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.12.208.0/24 ip daddr 10.255.167.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.81.0/24 ip daddr 10.255.243.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.79.29.0/24 ip daddr 10.255.212.0/24 ip protocol 17 dport 53 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.9.0/24 ip daddr 10.255.26.0/24 ip protocol 6 dport 8443 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.87.0/24 ip daddr 10.172.220.0/24 ip protocol 6 dport 22 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.31.0.0/24 ip daddr 192.168.203.0/24 ip protocol 6 dport 8080 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.147.145.0/24 ip daddr 10.255.205.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to dmz [Injected: misordered move]
+        ip saddr 192.168.160.0/24 ip daddr 172.16.218.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.168.56.0/24 ip daddr 10.75.140.0/24 ip protocol 6 dport 22 drop
+        # Injected: shadow candidate for original rule 167
+        ip saddr 10.217.60.0/22 ip daddr 192.168.128.0/22 ip protocol 6 dport 5321-5507 accept
+        # Zone: internal (trust=medium) - drop to dmz [Injected: misordered move]
+        ip saddr 10.25.229.0/24 ip daddr 172.16.170.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.165.197.0/24 ip daddr 10.8.20.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - drop to management [Injected: misordered move]
+        ip saddr 10.156.90.0/24 ip daddr 10.255.30.0/24 ip protocol 6 dport 53 drop
+        # Zone: dmz (trust=low) - drop to dmz [Injected: misordered move]
+        ip saddr 172.16.140.0/24 ip daddr 172.16.125.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.20.0/24 ip daddr 172.16.15.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 196
+        ip saddr 10.255.0.0/16 ip daddr 10.255.0.0/16 ip protocol 6 dport 4608-6997 accept
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.195.5.0/24 ip daddr 192.168.150.0/24 ip protocol 6 dport 5432 accept
+        # Injected: misordered move
+        ip saddr 172.16.221.0/24 ip daddr 192.168.128.0/24 ip protocol 6 dport 443 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.35.32.0/24 ip daddr 10.106.16.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 30 [Injected: misordered move]
+        ip saddr 172.16.112.0/20 ip daddr 10.255.240.0/20 ip protocol 6 dport 2769-3571 drop
+        # Injected: shadow candidate for original rule 31 [Injected: misordered move]
+        ip saddr 172.16.208.0/20 ip daddr 172.16.180.0/22 drop
+        # Injected: duplicate candidate of original rule 254
+        ip saddr 192.168.113.0/24 ip daddr 172.16.230.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 294
+        ip saddr 192.168.224.0/20 ip daddr 172.16.224.0/20 ip protocol 6 dport 7425-8465 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.228.0/24 ip daddr 10.136.179.0/24 ip protocol 6 dport 8443 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.26.0/24 ip daddr 10.255.147.0/24 ip protocol 6 dport 8080 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.198.0/24 ip daddr 10.124.87.0/24 ip protocol 6 dport 8080 accept
+        # Injected: shadow candidate for original rule 324
+        ip saddr 10.255.16.0/20 ip daddr 10.56.68.0/22 ip protocol 6 dport 441-1386 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.11.0/24 ip daddr 192.168.202.0/24 ip protocol 6 dport 8080 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.205.0/24 ip daddr 10.35.160.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.196.0/24 ip daddr 10.253.31.0/24 ip protocol 6 dport 3306 drop
+        # Zone: internal (trust=medium) - accept to servers [Injected: misordered move]
+        ip saddr 10.147.196.0/24 ip daddr 192.168.224.0/24 ip protocol 17 dport 53 accept
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.41.0/24 ip daddr 172.16.139.0/24 ip protocol 6 dport 5432 drop
+        # Injected: shadow candidate for original rule 54
+        ip saddr 172.16.16.0/22 ip daddr 10.189.0.0/16 ip protocol 6 dport 73-1854 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.108.0/24 ip daddr 172.16.161.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.157.0/24 ip daddr 10.255.23.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.3.0/24 ip daddr 172.16.104.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule -1
+        ip saddr 192.168.128.0/18 ip daddr 10.148.0.0/18 ip protocol 6 dport 7453-10480 drop
+        # Injected: duplicate candidate of original rule -1
+        ip saddr 10.161.128.0/20 ip daddr 10.61.52.0/22 ip protocol 6 dport 52-557 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.192.0/24 ip daddr 10.255.160.0/24 ip protocol 6 dport 80 accept
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.223.0/24 ip daddr 172.16.9.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.199.0/24 ip daddr 172.16.135.0/24 ip protocol 6 dport 5432 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.7.0/24 ip daddr 10.172.153.0/24 ip protocol 6 dport 8080 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.223.0/24 ip daddr 10.205.7.0/24 ip protocol 17 dport 53 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.148.0/24 ip daddr 172.16.153.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 358
+        ip saddr 10.255.0.0/16 ip daddr 10.255.64.0/22 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.242.0/24 ip daddr 10.255.129.0/24 ip protocol 6 dport 22 drop
+        # Injected: shadow candidate for original rule 181 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 172.16.152.0/22 ip daddr 10.255.0.0/16 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.236.0/24 ip daddr 10.255.21.0/24 ip protocol 6 dport 5432 drop
+        # Injected: shadow candidate for original rule 4 [Injected: misordered move]
+        ip saddr 172.16.108.0/22 ip daddr 10.172.84.0/22 ip protocol 6 dport 16-1206 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.146.0/24 ip daddr 10.182.197.0/24 ip protocol 6 dport 22 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.192.0/24 ip daddr 10.255.41.0/24 ip protocol 6 dport 80 accept
+        # Injected: shadow candidate for original rule -1
+        ip saddr 192.168.0.0/18 ip daddr 192.160.0.0/12 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.242.0/24 ip daddr 192.168.233.0/24 ip protocol 6 dport 80 accept
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.246.0/24 ip daddr 172.16.190.0/24 ip protocol 6 dport 53 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.185.0/24 ip daddr 172.16.158.0/24 ip protocol 6 dport 80 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.57.0/24 ip daddr 192.168.150.0/24 ip protocol 6 dport 3306 drop
+        # Injected: duplicate candidate of original rule 314
+        ip saddr 172.16.99.0/24 ip daddr 192.168.147.0/24 ip protocol 6 dport 5432 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.109.0/24 ip daddr 10.32.226.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.160.0/24 ip daddr 10.122.53.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 23 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 172.16.144.0/20 ip daddr 192.168.120.0/22 ip protocol 6 dport 2-933 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.158.0/24 ip daddr 10.240.34.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.82.0/24 ip daddr 10.255.102.0/24 ip protocol 6 dport 80 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.122.68.0/24 ip daddr 10.196.20.0/24 ip protocol 6 dport 443 drop
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.234.0/24 ip daddr 10.255.73.0/24 ip protocol 6 dport 8080 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.27.0/24 ip daddr 10.255.202.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.149.31.0/24 ip daddr 10.255.16.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.171.0/24 ip daddr 172.16.74.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 258
+        ip saddr 10.255.0.0/16 ip daddr 10.255.224.0/20 ip protocol 6 dport 38-194 accept
+        # Injected: shadow candidate for original rule 258 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.68.0/22 ip daddr 10.255.228.0/22 accept
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.76.0/24 ip daddr 10.84.62.0/24 ip protocol 6 dport 8443 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.32.0/24 ip daddr 10.255.56.0/24 ip protocol 6 dport 5432 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.123.0/24 ip daddr 172.16.73.0/24 ip protocol 6 dport 8080 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.210.0/24 ip daddr 192.168.127.0/24 ip protocol 6 dport 8080 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.22.0/24 ip daddr 10.255.198.0/24 ip protocol 6 dport 8443 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.182.0/24 ip daddr 172.16.34.0/24 ip protocol 6 dport 8443 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.170.0/24 ip daddr 172.16.68.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.32.0/24 ip daddr 10.234.84.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.47.0/24 ip daddr 172.16.121.0/24 ip protocol 6 dport 80 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.226.0/24 ip daddr 10.255.155.0/24 ip protocol 6 dport 8080 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.52.0/24 ip daddr 10.255.175.0/24 ip protocol 6 dport 53 drop
+        ip saddr 10.255.145.0/24 ip daddr 192.168.76.0/24 ip protocol 6 dport 80 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.40.0/24 ip daddr 10.255.220.0/24 ip protocol 6 dport 80 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.140.0/24 ip daddr 10.255.29.0/24 ip protocol 17 dport 53 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.72.211.0/24 ip daddr 192.168.36.0/24 ip protocol 6 dport 22 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.164.0/24 ip daddr 192.168.121.0/24 ip protocol 6 dport 8080 accept
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.95.0/24 ip daddr 172.16.255.0/24 ip protocol 6 dport 3306 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.252.0/24 ip daddr 10.13.117.0/24 ip protocol 6 dport 8443 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.79.0/24 ip daddr 10.246.225.0/24 ip protocol 6 dport 443 drop
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.254.206.0/24 ip daddr 10.73.70.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.46.0/24 ip daddr 172.16.110.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.98.0/24 ip daddr 192.168.35.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.66.0/24 ip daddr 10.255.43.0/24 ip protocol 6 dport 8080 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.66.0/24 ip daddr 10.221.128.0/24 ip protocol 6 dport 22 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.155.0/24 ip daddr 10.84.77.0/24 ip protocol 6 dport 80 drop
+        # Injected: shadow candidate for original rule 216
+        ip saddr 192.168.176.0/22 ip daddr 172.16.208.0/20 drop
+        # Injected: shadow candidate for original rule 323
+        ip saddr 10.255.0.0/16 ip daddr 10.255.192.0/20 ip protocol 6 dport 17-538 accept
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.15.0/24 ip daddr 10.255.254.0/24 ip protocol 6 dport 8080 accept
+        # Injected: shadow candidate for original rule 376 [Injected: misordered move]
+        ip saddr 10.255.236.0/22 ip daddr 10.29.128.0/22 ip protocol 6 dport 3218-5093 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.60.0/24 ip daddr 192.168.91.0/24 ip protocol 6 dport 3306 accept
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.104.0/24 ip daddr 10.255.174.0/24 ip protocol 6 dport 80 accept
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.162.0/24 ip daddr 10.255.226.0/24 ip protocol 6 dport 3306 drop
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.225.0/24 ip daddr 10.255.197.0/24 ip protocol 6 dport 8443 drop
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.174.4.0/24 ip daddr 10.255.136.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.78.0/24 ip daddr 10.191.113.0/24 ip protocol 6 dport 80 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.146.0/24 ip daddr 10.255.4.0/24 ip protocol 17 dport 53 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.254.0/24 ip daddr 10.255.188.0/24 ip protocol 6 dport 8080 drop
+        # Injected: shadow candidate for original rule 316
+        ip saddr 10.255.176.0/20 ip daddr 192.168.0.0/16 accept
+        # Injected: shadow candidate for original rule 317 [Injected: misordered move]
+        ip saddr 10.255.0.0/16 ip daddr 10.255.20.0/22 ip protocol 6 dport 3-1224 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.196.246.0/24 ip daddr 10.247.103.0/24 ip protocol 6 dport 53 drop
+        # Zone: internal (trust=medium) - drop to dmz [Injected: misordered move]
+        ip saddr 10.232.208.0/24 ip daddr 172.16.46.0/24 ip protocol 6 dport 443 drop
+        # Injected: shadow candidate for original rule 338
+        ip saddr 10.255.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 dport 1-811 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.160.0/24 ip daddr 10.255.142.0/24 ip protocol 6 dport 443 drop
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.224.0/24 ip daddr 10.22.94.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 192.168.214.0/24 ip daddr 10.211.111.0/24 ip protocol 6 dport 3306 drop
+        # Zone: dmz (trust=low) - drop to dmz [Injected: misordered move] [Injected: misordered move]
+        ip saddr 172.16.44.0/24 ip daddr 172.16.216.0/24 ip protocol 6 dport 22 drop
+        # Zone: dmz (trust=low) - drop to servers
+        ip saddr 172.16.179.0/24 ip daddr 192.168.204.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 330 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.144.0/22 ip daddr 192.168.0.0/16 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.165.0/24 ip daddr 10.255.161.0/24 ip protocol 6 dport 80 drop
+        ip saddr 172.16.238.0/24 ip daddr 192.168.81.0/24 ip protocol 6 dport 8080 accept
+        ip saddr 172.16.177.0/24 ip daddr 10.255.131.0/24 ip protocol 17 dport 443 accept
+        # Injected: shadow candidate for original rule 335
+        ip saddr 10.255.0.0/16 ip daddr 10.26.224.0/20 accept
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.51.0/24 ip daddr 10.255.70.0/24 ip protocol 6 dport 22 accept
+        # Zone: dmz (trust=low) - drop to management
+        ip saddr 172.16.25.0/24 ip daddr 10.255.127.0/24 ip protocol 17 dport 53 drop
+        # Injected: shadow candidate for original rule 320 [Injected: misordered move]
+        ip saddr 10.255.172.0/22 ip daddr 192.168.248.0/22 ip protocol 6 dport 7176-9701 accept
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.18.0/24 ip daddr 10.203.66.0/24 ip protocol 6 dport 5432 accept
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.19.0/24 ip daddr 192.168.4.0/24 ip protocol 6 dport 8080 accept
+        # Zone: servers (trust=high) - drop to management
+        ip saddr 192.168.13.0/24 ip daddr 10.255.136.0/24 ip protocol 6 dport 22 drop
+        # Zone: management (trust=admin) - accept to servers
+        ip saddr 10.255.86.0/24 ip daddr 192.168.71.0/24 ip protocol 6 dport 5432 accept
+        ip saddr 192.168.152.0/24 ip daddr 10.255.214.0/24 ip protocol 6 dport 443 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.165.0/24 ip daddr 10.255.127.0/24 ip protocol 6 dport 22 accept
+        # Zone: servers (trust=high) - drop to dmz
+        ip saddr 192.168.168.0/24 ip daddr 172.16.62.0/24 ip protocol 6 dport 3306 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.176.0/24 ip daddr 10.255.74.0/24 ip protocol 6 dport 8080 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.133.0/24 ip daddr 172.16.91.0/24 ip protocol 6 dport 8080 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.125.0/24 ip daddr 10.255.255.0/24 ip protocol 6 dport 8443 accept
+        # Zone: internal (trust=medium) - drop to management
+        ip saddr 10.245.26.0/24 ip daddr 10.255.225.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 308
+        ip saddr 10.255.208.0/20 ip daddr 10.255.124.0/22 accept
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.165.5.0/24 ip daddr 192.168.125.0/24 ip protocol 17 dport 53 accept
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.37.0/24 ip daddr 10.23.48.0/24 ip protocol 6 dport 3306 accept
+        # Zone: servers (trust=high) - drop to internal
+        ip saddr 192.168.185.0/24 ip daddr 10.114.207.0/24 ip protocol 6 dport 53 drop
+        # Injected: shadow candidate for original rule 76 [Injected: misordered move]
+        ip saddr 172.16.32.0/20 ip daddr 10.255.224.0/20 ip protocol 6 dport 3180-4251 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.129.58.0/24 ip daddr 192.168.165.0/24 ip protocol 17 dport 53 accept
+        ip saddr 10.255.20.0/24 ip daddr 172.16.96.0/24 ip protocol 17 dport 443 drop
+        # Injected: shadow candidate for original rule 368 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.0.0/16 ip daddr 10.255.112.0/20 accept
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.41.0/24 ip daddr 172.16.214.0/24 ip protocol 6 dport 8443 drop
+        ip saddr 172.16.228.0/24 ip daddr 172.16.125.0/24 ip protocol 17 dport 3306 drop
+        # Injected: shadow candidate for original rule 370 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.0.0/16 ip daddr 10.71.0.0/16 ip protocol 6 dport 7642-8394 accept
+        # Zone: dmz (trust=low) - drop to internal
+        ip saddr 172.16.232.0/24 ip daddr 10.167.88.0/24 ip protocol 6 dport 8443 drop
+        # Injected: shadow candidate for original rule 372 [Injected: misordered move]
+        ip saddr 10.255.0.0/16 ip daddr 10.153.0.0/16 ip protocol 6 dport 7407-9593 accept
+        # Injected: shadow candidate for original rule 373 [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.218.184.0/22 ip daddr 10.255.24.0/22 drop
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.242.0/24 ip daddr 10.123.96.0/24 ip protocol 6 dport 443 accept
+        # Zone: internal (trust=medium) - drop to internal
+        ip saddr 10.169.251.0/24 ip daddr 10.51.98.0/24 ip protocol 6 dport 5432 drop
+        # Zone: internal (trust=medium) - accept to servers
+        ip saddr 10.170.53.0/24 ip daddr 192.168.193.0/24 ip protocol 6 dport 5432 accept
+        # Zone: management (trust=admin) - accept to internal
+        ip saddr 10.255.1.0/24 ip daddr 10.11.163.0/24 ip protocol 6 dport 8080 accept
+        # Injected: shadow candidate for original rule 362 [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.80.0/20 ip daddr 10.215.56.0/22 drop
+        ip saddr 10.255.224.0/24 ip daddr 10.186.80.0/24 ip protocol 6 dport 8080 drop
+        # Policy: Zone management -> servers - accept [Injected: misordered move] [Injected: misordered move]
+        ip saddr 10.255.38.0/24 ip daddr 192.168.143.0/24 accept
+        # Injected: shadow candidate for original rule 385
+        ip saddr 10.255.96.0/20 ip daddr 192.168.188.0/22 accept
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.151.0/24 ip daddr 10.255.78.0/24 ip protocol 6 dport 443 accept
+        # Injected: shadow candidate for original rule 225
+        ip saddr 192.168.0.0/16 ip daddr 10.255.44.0/22 drop
+        # Zone: management (trust=admin) - accept to management
+        ip saddr 10.255.6.0/24 ip daddr 10.255.8.0/24 ip protocol 6 dport 8080 accept
+        ip saddr 10.255.235.0/24 ip daddr 10.115.163.0/24 ip protocol 6 dport 53 accept
+        # Injected: shadow candidate for original rule 389 [Injected: misordered move]
+        ip saddr 10.255.0.0/16 ip daddr 10.255.0.0/16 accept
+        # Zone: internal (trust=medium) - drop to dmz
+        ip saddr 10.159.184.0/24 ip daddr 172.16.192.0/24 ip protocol 6 dport 3306 drop
+        # Policy: Zone dmz -> servers - drop
+        ip saddr 172.16.169.0/24 ip daddr 192.168.48.0/24 drop
+        # Zone: dmz (trust=low) - drop to dmz
+        ip saddr 172.16.146.0/24 ip daddr 172.16.120.0/24 ip protocol 6 dport 8080 drop
+        # Policy: Zone internal -> servers - accept
+        ip saddr 10.21.201.0/24 ip daddr 192.168.117.0/24 accept
+        # Policy: Zone management -> internal - accept
+        ip saddr 10.255.138.0/24 ip daddr 10.23.214.0/24 accept
+        drop
+    }
+}

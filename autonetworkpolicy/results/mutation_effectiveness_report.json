@@ -1,0 +1,208 @@
+{
+  "generated_at": "2026-03-17T17:16:47.957969",
+  "paths": {
+    "experiments_dir": "/Users/omkarrajmane/code/auto-network-policy/autonetworkpolicy/results/experiments"
+  },
+  "overview": {
+    "experiments": 10,
+    "summaries": 10,
+    "total_iterations_from_metrics": 48,
+    "total_iterations_from_summaries": 48,
+    "successful_mutations": 48,
+    "failed_mutations": 0,
+    "rejected_mutations": 0
+  },
+  "mutation_effectiveness": {
+    "remove_shadowed": {
+      "attempts": 33,
+      "accepted": 33,
+      "rejected": 0,
+      "errors": 0,
+      "acceptance_rate": 1.0,
+      "avg_score_delta": 78.4484848484848,
+      "avg_rule_delta": -1.0
+    },
+    "merge_adjacent": {
+      "attempts": 15,
+      "accepted": 15,
+      "rejected": 0,
+      "errors": 0,
+      "acceptance_rate": 1.0,
+      "avg_score_delta": 201.80000000000004,
+      "avg_rule_delta": -1.0
+    }
+  },
+  "scenario_effectiveness": {
+    "redundant_shadowing": {
+      "best_mutation_type": "merge_adjacent",
+      "mutation_rankings": [
+        {
+          "mutation_type": "merge_adjacent",
+          "attempts": 7,
+          "accepted": 7,
+          "acceptance_rate": 1.0,
+          "avg_score_delta": 240.57142857142864,
+          "avg_rule_delta": -1.0
+        },
+        {
+          "mutation_type": "remove_shadowed",
+          "attempts": 13,
+          "accepted": 13,
+          "acceptance_rate": 1.0,
+          "avg_score_delta": 43.26153846153845,
+          "avg_rule_delta": -1.0
+        }
+      ]
+    },
+    "broken_segmentation": {
+      "best_mutation_type": "merge_adjacent",
+      "mutation_rankings": [
+        {
+          "mutation_type": "merge_adjacent",
+          "attempts": 8,
+          "accepted": 8,
+          "acceptance_rate": 1.0,
+          "avg_score_delta": 167.875,
+          "avg_rule_delta": -1.0
+        },
+        {
+          "mutation_type": "remove_shadowed",
+          "attempts": 7,
+          "accepted": 7,
+          "acceptance_rate": 1.0,
+          "avg_score_delta": 95.97142857142856,
+          "avg_rule_delta": -1.0
+        }
+      ]
+    },
+    "over_permissive": {
+      "best_mutation_type": "remove_shadowed",
+      "mutation_rankings": [
+        {
+          "mutation_type": "remove_shadowed",
+          "attempts": 13,
+          "accepted": 13,
+          "acceptance_rate": 1.0,
+          "avg_score_delta": 104.19999999999999,
+          "avg_rule_delta": -1.0
+        }
+      ]
+    }
+  },
+  "failure_analysis": {
+    "total_failures": 0,
+    "reasons": {}
+  },
+  "llm_behavior": {
+    "experiments_analyzed": 10,
+    "converged_experiments": 5,
+    "convergence_rate": 0.5,
+    "avg_dominant_ratio": 0.76,
+    "dominant_mutation_distribution": {
+      "remove_shadowed": 9,
+      "merge_adjacent": 1
+    },
+    "experiments": [
+      {
+        "experiment_name": "llm_cold_start_redundant_shadowing",
+        "scenario": "redundant_shadowing",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.8,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 1,
+        "converged": true
+      },
+      {
+        "experiment_name": "llm_trial_broken_segmentation_run1",
+        "scenario": "broken_segmentation",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.6,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 1,
+        "converged": false
+      },
+      {
+        "experiment_name": "llm_trial_broken_segmentation_run2",
+        "scenario": "broken_segmentation",
+        "iterations": 5,
+        "dominant_mutation": "merge_adjacent",
+        "dominant_ratio": 0.8,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 1,
+        "converged": true
+      },
+      {
+        "experiment_name": "llm_trial_broken_segmentation_run3",
+        "scenario": "broken_segmentation",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.6,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 2,
+        "converged": false
+      },
+      {
+        "experiment_name": "llm_trial_over_permissive_run1",
+        "scenario": "over_permissive",
+        "iterations": 4,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 1.0,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 4,
+        "converged": true
+      },
+      {
+        "experiment_name": "llm_trial_over_permissive_run2",
+        "scenario": "over_permissive",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 1.0,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 5,
+        "converged": true
+      },
+      {
+        "experiment_name": "llm_trial_over_permissive_run3",
+        "scenario": "over_permissive",
+        "iterations": 4,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 1.0,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 4,
+        "converged": true
+      },
+      {
+        "experiment_name": "llm_trial_redundant_shadowing_run1",
+        "scenario": "redundant_shadowing",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.6,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 1,
+        "converged": false
+      },
+      {
+        "experiment_name": "llm_trial_redundant_shadowing_run2",
+        "scenario": "redundant_shadowing",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.6,
+        "final_streak_mutation": "merge_adjacent",
+        "final_streak_length": 1,
+        "converged": false
+      },
+      {
+        "experiment_name": "llm_trial_redundant_shadowing_run3",
+        "scenario": "redundant_shadowing",
+        "iterations": 5,
+        "dominant_mutation": "remove_shadowed",
+        "dominant_ratio": 0.6,
+        "final_streak_mutation": "remove_shadowed",
+        "final_streak_length": 1,
+        "converged": false
+      }
+    ]
+  }
+}

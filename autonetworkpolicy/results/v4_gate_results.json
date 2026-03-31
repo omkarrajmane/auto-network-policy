@@ -1,0 +1,186 @@
+{
+    "k8s": {
+        "original": {
+            "rules": 199,
+            "weighted_avg_depth": 99.0852,
+            "cpu_cost_estimate": 100.17426988922458,
+            "per_class_depth": {
+                "dns_lookup": 198.81067472306142,
+                "http_frontend": 1.0,
+                "backend_api": 0.0,
+                "db_query": 2.0,
+                "monitoring": 199.0,
+                "cache": 7.0,
+                "background": 199.0
+            }
+        },
+        "static_analysis": {
+            "rules": 25,
+            "weighted_avg_depth": 13.1118,
+            "cpu_cost_estimate": 13.24436052366566,
+            "per_class_depth": {
+                "dns_lookup": 24.98590130916415,
+                "http_frontend": 1.0,
+                "backend_api": 0.0,
+                "db_query": 2.0,
+                "monitoring": 25.0,
+                "cache": 7.0,
+                "background": 25.0
+            }
+        },
+        "simulated_annealing": {
+            "rules": 25,
+            "weighted_avg_depth": 13.1118,
+            "cpu_cost_estimate": 13.24436052366566,
+            "per_class_depth": {
+                "dns_lookup": 24.98590130916415,
+                "http_frontend": 1.0,
+                "backend_api": 0.0,
+                "db_query": 2.0,
+                "monitoring": 25.0,
+                "cache": 7.0,
+                "background": 25.0
+            }
+        },
+        "random_reorder": {
+            "rules": 65,
+            "weighted_avg_depth": 56.8355,
+            "cpu_cost_estimate": 56.89849497680299,
+            "per_class_depth": {
+                "dns_lookup": 64.9662638469285,
+                "http_frontend": 54.61800486618005,
+                "backend_api": 37.532934131736525,
+                "db_query": 57.494483450351055,
+                "monitoring": 65.0,
+                "cache": 42.18,
+                "background": 65.0
+            }
+        },
+        "greedy_hitcount": {
+            "rules": 125,
+            "weighted_avg_depth": 105.4593,
+            "cpu_cost_estimate": 105.67767168567454,
+            "per_class_depth": {
+                "dns_lookup": 124.96701913393757,
+                "http_frontend": 85.41605839416059,
+                "backend_api": 84.59747172322022,
+                "db_query": 87.10531594784354,
+                "monitoring": 125.0,
+                "cache": 94.15,
+                "background": 125.0
+            }
+        },
+        "traffic_aware_greedy": {
+            "rules": 25,
+            "weighted_avg_depth": 13.3587,
+            "cpu_cost_estimate": 13.490936555891238,
+            "per_class_depth": {
+                "dns_lookup": 24.977341389728096,
+                "http_frontend": 1.0,
+                "backend_api": 2.0,
+                "db_query": 3.0,
+                "monitoring": 25.0,
+                "cache": 4.0,
+                "background": 25.0
+            }
+        }
+    },
+    "enterprise": {
+        "original": {
+            "rules": 613,
+            "weighted_avg_depth": 381.2798,
+            "cpu_cost_estimate": 381.9542435737635,
+            "per_class_depth": {
+                "eng_https": 315.79077167859987,
+                "eng_ssh": 102.8476821192053,
+                "finance_db": 102.94679966749793,
+                "hr_web": 578.739837398374,
+                "guest_web": 604.1081871345029,
+                "exec_https": 436.9961489088575,
+                "cross_dept": 611.802860061287,
+                "guest_blocked": 603.0200400801604,
+                "background": 613.0
+            }
+        },
+        "static_analysis": {
+            "rules": 305,
+            "weighted_avg_depth": 211.5642,
+            "cpu_cost_estimate": 211.90936589407477,
+            "per_class_depth": {
+                "eng_https": 197.15354017501988,
+                "eng_ssh": 78.70860927152317,
+                "finance_db": 78.76807980049875,
+                "hr_web": 289.8394308943089,
+                "guest_web": 302.86842105263156,
+                "exec_https": 266.99743260590503,
+                "cross_dept": 304.5137895812053,
+                "guest_blocked": 300.6112224448898,
+                "background": 305.0
+            }
+        },
+        "simulated_annealing": {
+            "rules": 235,
+            "weighted_avg_depth": 170.7872,
+            "cpu_cost_estimate": 170.8952805254717,
+            "per_class_depth": {
+                "eng_https": 179.0,
+                "eng_ssh": 81.81258278145695,
+                "finance_db": 81.83042394014963,
+                "hr_web": 231.53760162601625,
+                "guest_web": 224.9132553606238,
+                "exec_https": 145.0,
+                "cross_dept": 234.59959141981614,
+                "guest_blocked": 231.97394789579158,
+                "background": 235.0
+            }
+        },
+        "random_reorder": {
+            "rules": 277,
+            "weighted_avg_depth": 132.8375,
+            "cpu_cost_estimate": 133.05044579660748,
+            "per_class_depth": {
+                "eng_https": 22.0,
+                "eng_ssh": 53.0,
+                "finance_db": 52.970906068162925,
+                "hr_web": 259.6117886178862,
+                "guest_web": 265.7719298245614,
+                "exec_https": 69.96148908857509,
+                "cross_dept": 276.33094994892747,
+                "guest_blocked": 272.5110220440882,
+                "background": 277.0
+            }
+        },
+        "greedy_hitcount": {
+            "rules": 586,
+            "weighted_avg_depth": 577.169,
+            "cpu_cost_estimate": 577.1945062614899,
+            "per_class_depth": {
+                "eng_https": 579.1730310262529,
+                "eng_ssh": 578.7450331125827,
+                "finance_db": 544.0,
+                "hr_web": 585.0142276422764,
+                "guest_web": 582.0760233918129,
+                "exec_https": 580.0397946084724,
+                "cross_dept": 585.9948927477018,
+                "guest_blocked": 585.9559118236473,
+                "background": 586.0
+            }
+        },
+        "traffic_aware_greedy": {
+            "rules": 235,
+            "weighted_avg_depth": 92.7077,
+            "cpu_cost_estimate": 92.87185806130405,
+            "per_class_depth": {
+                "eng_https": 0.0,
+                "eng_ssh": 1.0,
+                "finance_db": 1.0,
+                "hr_web": 231.54573170731706,
+                "guest_web": 225.13255360623782,
+                "exec_https": 3.0,
+                "cross_dept": 234.2849846782431,
+                "guest_blocked": 230.31062124248496,
+                "background": 235.0
+            }
+        }
+    }
+}

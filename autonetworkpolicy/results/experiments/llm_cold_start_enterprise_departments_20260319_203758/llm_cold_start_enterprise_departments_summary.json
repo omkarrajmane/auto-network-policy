@@ -1,0 +1,22 @@
+{
+  "experiment_name": "llm_cold_start_enterprise_departments",
+  "scenario": "enterprise_departments",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-19T20:37:58.657353",
+  "end_time": "2026-03-19T20:45:49.581814",
+  "total_iterations": 10,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 5,
+  "baseline_score": 613.0,
+  "best_score": 2585.840114076247,
+  "improvement_pct": 321.83362382973036,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 463670.65238952637,
+  "avg_iteration_time_ms": 47092.448115348816,
+  "mutation_type_distribution": {
+    "remove_shadowed": 5,
+    "move_before": 5
+  },
+  "verification_pass_rate": 1.0
+}

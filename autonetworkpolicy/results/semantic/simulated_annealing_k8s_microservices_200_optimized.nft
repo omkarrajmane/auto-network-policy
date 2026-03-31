@@ -1,0 +1,57 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080
+        ip saddr 10.243.6.0/24 ip daddr 10.243.2.0/24 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443
+        ip saddr 10.243.0.0/24 ip daddr 10.243.10.0/24 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432
+        ip saddr 10.243.3.0/24 ip daddr 10.243.5.0/24 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53
+        ip saddr 10.243.0.0/24 ip daddr 10.241.0.0/24 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53
+        ip saddr 10.243.0.0/24 ip daddr 10.241.0.0/24 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.243.1.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443
+        ip saddr 10.243.1.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379
+        ip saddr 10.243.4.0/24 ip daddr 10.243.8.0/24 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080
+        ip saddr 10.243.8.0/24 ip daddr 10.243.4.0/24 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080
+        ip saddr 10.244.4.0/24 ip daddr 10.244.2.0/24 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306
+        ip saddr 10.244.1.0/24 ip daddr 10.244.3.0/24 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443
+        ip saddr 10.244.0.0/24 ip daddr 10.244.5.0/24 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443
+        ip saddr 10.244.5.0/24 ip daddr 10.244.0.0/24 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080
+        ip saddr 10.242.2.0/24 ip daddr 10.243.0.0/24 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443
+        ip saddr 10.242.2.0/24 ip daddr 10.243.0.0/24 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080
+        ip saddr 10.242.2.0/24 ip daddr 10.244.0.0/24 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000
+        ip saddr 10.242.1.0/24 ip daddr 10.242.0.0/24 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080
+        ip saddr 10.240.3.0/24 ip daddr 10.240.1.0/24 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379
+        ip saddr 10.240.1.0/24 ip daddr 10.240.2.0/24 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53
+        ip saddr 10.240.0.0/24 ip daddr 10.241.0.0/24 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443
+        ip saddr 10.240.0.0/24 ip daddr 10.243.11.0/24 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443
+        ip saddr 10.243.12.0/24 ip daddr 10.243.11.0/24 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.244.0.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.243.9.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080
+        ip saddr 10.243.7.0/24 ip daddr 10.243.4.0/24 ip protocol 6 dport 8080 accept
+        drop
+    }
+}

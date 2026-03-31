@@ -1,0 +1,21 @@
+{
+  "experiment_name": "llm_cold_start_k8s_microservices",
+  "scenario": "k8s_microservices",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-19T20:35:56.439307",
+  "end_time": "2026-03-19T20:37:49.730461",
+  "total_iterations": 5,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 0,
+  "baseline_score": 199.0,
+  "best_score": 937.6185567010309,
+  "improvement_pct": 371.16510386986477,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 112382.67207145691,
+  "avg_iteration_time_ms": 22658.231782913208,
+  "mutation_type_distribution": {
+    "remove_shadowed": 5
+  },
+  "verification_pass_rate": 1.0
+}

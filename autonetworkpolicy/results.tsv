@@ -1,0 +1,36 @@
+commit	score	throughput_gbps	rule_count	status	description
+experime	120.0000	0.00	500	keep	test_append_1: 20.0% improvement
+experime	140.0000	0.00	500	keep	test_append_2: 40.0% improvement
+baseline	78.5571	0.00	107	baseline	random_reorder on over_permissive: 78.6% reduction
+baseline	50.9018	0.00	245	baseline	greedy_hitcount on over_permissive: 50.9% reduction
+baseline	76.1523	0.00	119	baseline	static_analysis on over_permissive: 76.2% reduction
+baseline	77.1543	0.00	114	baseline	simulated_annealing on over_permissive: 77.2% reduction
+baseline	82.9431	0.00	51	baseline	random_reorder on broken_segmentation: 82.9% reduction
+baseline	71.9064	0.00	84	baseline	greedy_hitcount on broken_segmentation: 71.9% reduction
+baseline	71.9064	0.00	84	baseline	static_analysis on broken_segmentation: 71.9% reduction
+baseline	71.9064	0.00	84	baseline	simulated_annealing on broken_segmentation: 71.9% reduction
+baseline	66.4160	0.00	134	baseline	random_reorder on redundant_shadowing: 66.4% reduction
+baseline	2.0050	0.00	391	baseline	greedy_hitcount on redundant_shadowing: 2.0% reduction
+baseline	77.9449	0.00	88	baseline	static_analysis on redundant_shadowing: 77.9% reduction
+baseline	77.9449	0.00	88	baseline	simulated_annealing on redundant_shadowing: 77.9% reduction
+baseline	66.0643	0.00	169	baseline	random_reorder on over_permissive: 66.1% reduction
+baseline	38.7550	0.00	305	baseline	greedy_hitcount on over_permissive: 38.8% reduction
+baseline	71.8876	0.00	140	baseline	static_analysis on over_permissive: 71.9% reduction
+baseline	72.6908	0.00	136	baseline	simulated_annealing on over_permissive: 72.7% reduction
+baseline	61.6915	0.00	77	baseline	random_reorder on broken_segmentation: 61.7% reduction
+baseline	61.6915	0.00	77	baseline	greedy_hitcount on broken_segmentation: 61.7% reduction
+baseline	61.6915	0.00	77	baseline	static_analysis on broken_segmentation: 61.7% reduction
+baseline	61.6915	0.00	77	baseline	simulated_annealing on broken_segmentation: 61.7% reduction
+baseline	65.6642	0.00	137	baseline	random_reorder on redundant_shadowing: 65.7% reduction
+baseline	10.6212	0.00	446	baseline	random_reorder on port_heavy_enterprise: 10.6% reduction
+baseline	6.2124	0.00	468	baseline	greedy_hitcount on port_heavy_enterprise: 6.2% reduction
+baseline	9.8196	0.00	450	baseline	static_analysis on port_heavy_enterprise: 9.8% reduction
+baseline	10.0200	0.00	449	baseline	simulated_annealing on port_heavy_enterprise: 10.0% reduction
+baseline	54.8872	0.00	180	baseline	random_reorder on mixed_protocol: 54.9% reduction
+baseline	5.7644	0.00	376	baseline	greedy_hitcount on mixed_protocol: 5.8% reduction
+baseline	68.4211	0.00	126	baseline	static_analysis on mixed_protocol: 68.4% reduction
+baseline	68.9223	0.00	124	baseline	simulated_annealing on mixed_protocol: 68.9% reduction
+experime	937.6186	0.00	199	keep	llm_cold_start_k8s_microservices: 371.2% improvement
+experime	2585.8401	0.00	613	keep	llm_cold_start_enterprise_departments: 321.8% improvement
+experime	995.5071	0.00	235	keep	hybrid_sa_then_llm_enterprise: 323.6% improvement
+experime	114.4000	0.00	25	keep	hybrid_static_then_llm_k8s: 357.6% improvement

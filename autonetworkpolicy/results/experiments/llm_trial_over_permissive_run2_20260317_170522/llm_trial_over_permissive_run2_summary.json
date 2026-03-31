@@ -1,0 +1,21 @@
+{
+  "experiment_name": "llm_trial_over_permissive_run2",
+  "scenario": "over_permissive",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-17T17:05:22.459115",
+  "end_time": "2026-03-17T17:05:31.867930",
+  "total_iterations": 5,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 0,
+  "baseline_score": 499.0,
+  "best_score": 950.6,
+  "improvement_pct": 90.50100200400803,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 8210.175514221191,
+  "avg_iteration_time_ms": 1881.7625999450684,
+  "mutation_type_distribution": {
+    "remove_shadowed": 5
+  },
+  "verification_pass_rate": 1.0
+}

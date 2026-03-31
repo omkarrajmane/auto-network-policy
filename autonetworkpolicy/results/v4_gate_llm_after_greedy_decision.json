@@ -1,0 +1,16 @@
+{
+  "experiment": "v4_gate_llm_after_greedy_codex",
+  "provider": "opencode_subprocess",
+  "model": "openai/gpt-5.3-codex",
+  "enterprise": {
+    "traffic_aware_greedy_weighted_avg_depth": 92.7077,
+    "llm_after_greedy_weighted_avg_depth": 92.2364,
+    "improvement_percent": 0.508
+  },
+  "decision_thresholds": {
+    "A_PROCEED": ">20% improvement vs greedy",
+    "B_PAUSE": "5-20% improvement vs greedy",
+    "C_STOP": "<=5% improvement vs greedy"
+  },
+  "outcome": "C_STOP"
+}

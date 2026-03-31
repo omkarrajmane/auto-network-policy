@@ -1,0 +1,143 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        ip saddr 172.16.54.0/24 ip daddr 10.217.112.0/24 drop
+        ip saddr 10.195.163.0/24 ip daddr 192.168.213.0/24 ip protocol 6 dport 143 drop
+        ip saddr 10.9.131.0/24 ip daddr 192.168.110.0/24 ip protocol 17 dport 443 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 accept
+        ip saddr 10.37.30.0/24 ip daddr 192.168.80.0/24 ip protocol 17 dport 3306 accept
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 accept
+        ip saddr 192.168.67.0/24 ip daddr 172.25.224.0/24 ip protocol 6 dport 3306 accept
+        ip saddr 10.65.21.0/24 ip daddr 10.157.186.0/24 ip protocol 17 dport 22 accept
+        ip saddr 192.168.240.0/24 ip daddr 10.149.16.0/24 drop
+        ip saddr 10.119.111.0/24 ip daddr 192.168.28.0/24 ip protocol 17 dport 443 drop
+        ip saddr 10.121.165.0/24 ip daddr 192.168.8.0/24 ip protocol 17 dport 443 drop
+        ip saddr 192.168.10.0/24 ip daddr 10.194.244.0/24 ip protocol 17 drop
+        ip saddr 172.20.196.0/24 ip daddr 10.97.69.0/24 ip protocol 17 dport 25 accept
+        ip saddr 172.21.98.0/24 ip daddr 192.168.110.0/24 drop
+        ip saddr 192.168.98.0/24 ip daddr 192.168.161.0/24 accept
+        ip saddr 192.168.93.0/24 ip daddr 10.249.108.0/24 ip protocol 17 drop
+        ip saddr 172.29.59.0/24 ip daddr 10.197.97.0/24 accept
+        ip saddr 10.211.70.0/24 ip daddr 192.168.118.0/24 ip protocol 6 dport 80 drop
+        ip saddr 172.26.14.0/24 ip daddr 192.168.59.0/24 ip protocol 6 dport 25 drop
+        ip saddr 10.135.19.0/24 ip daddr 10.55.222.0/24 ip protocol 17 accept
+        ip saddr 192.168.71.0/24 ip daddr 192.168.216.0/24 ip protocol 17 accept
+        ip saddr 10.47.216.0/24 ip daddr 192.168.185.0/24 ip protocol 17 dport 22 drop
+        ip saddr 172.24.248.0/24 ip daddr 10.122.140.0/24 accept
+        ip saddr 10.173.26.0/24 ip daddr 192.168.171.0/24 ip protocol 17 dport 80 drop
+        ip saddr 10.242.195.0/24 ip daddr 10.197.77.0/24 ip protocol 6 drop
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 accept
+        ip saddr 192.168.47.0/24 ip daddr 192.168.115.0/24 ip protocol 17 dport 80 accept
+        ip saddr 172.25.64.0/24 ip daddr 10.251.52.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 172.20.18.0/24 ip daddr 192.168.189.0/24 ip protocol 17 dport 443 drop
+        ip saddr 172.25.217.0/24 ip daddr 192.168.128.0/24 ip protocol 17 drop
+        ip saddr 172.31.109.0/24 ip daddr 172.28.30.0/24 ip protocol 6 drop
+        ip saddr 172.26.143.0/24 ip daddr 10.141.5.0/24 ip protocol 6 dport 53 drop
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 accept
+        ip saddr 192.168.115.0/24 ip daddr 192.168.194.0/24 ip protocol 17 accept
+        ip saddr 10.58.99.0/24 ip daddr 192.168.178.0/24 ip protocol 6 dport 110 drop
+        ip saddr 10.49.220.0/24 ip daddr 10.181.216.0/24 drop
+        ip saddr 10.232.204.0/24 ip daddr 192.168.212.0/24 ip protocol 6 dport 389 drop
+        ip saddr 192.168.146.0/24 ip daddr 192.168.120.0/24 ip protocol 17 accept
+        ip saddr 10.76.84.0/24 ip daddr 192.168.167.0/24 ip protocol 17 dport 5432 drop
+        ip saddr 172.21.38.0/24 ip daddr 10.80.1.0/24 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 drop
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 drop
+        ip saddr 10.155.140.0/24 ip daddr 192.168.28.0/24 ip protocol 6 dport 110 drop
+        ip saddr 10.52.63.0/24 ip daddr 192.168.145.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.198.191.0/24 ip daddr 192.168.129.0/24 ip protocol 6 dport 389 drop
+        ip saddr 10.91.54.0/24 ip daddr 192.168.49.0/24 ip protocol 6 dport 5432 drop
+        ip saddr 10.239.255.0/24 ip daddr 192.168.157.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 10.59.206.0/24 ip daddr 172.16.236.0/24 ip protocol 6 accept
+        ip saddr 10.242.129.0/24 ip daddr 192.168.18.0/24 ip protocol 6 dport 6379 drop
+        ip saddr 10.13.201.0/24 ip daddr 10.13.42.0/24 ip protocol 17 dport 443 drop
+        ip saddr 10.155.146.0/24 ip daddr 10.107.220.0/24 drop
+        ip saddr 192.168.215.0/24 ip daddr 192.168.129.0/24 ip protocol 6 dport 3306 accept
+        ip saddr 172.23.237.0/24 ip daddr 10.194.172.0/24 ip protocol 17 accept
+        ip saddr 10.41.16.0/24 ip daddr 192.168.47.0/24 ip protocol 17 dport 143 drop
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 drop
+        ip saddr 10.159.60.0/24 ip daddr 192.168.151.0/24 ip protocol 6 dport 110 drop
+        ip saddr 172.25.43.0/24 ip daddr 10.127.60.0/24 accept
+        ip saddr 10.113.74.0/24 ip daddr 192.168.8.0/24 ip protocol 17 dport 25 drop
+        ip saddr 172.30.130.0/24 ip daddr 10.235.130.0/24 ip protocol 17 dport 3306 accept
+        ip saddr 10.70.49.0/24 ip daddr 192.168.20.0/24 ip protocol 17 dport 25 drop
+        ip saddr 10.60.245.0/24 ip daddr 192.168.124.0/24 ip protocol 6 dport 389 drop
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 accept
+        ip saddr 192.168.20.0/24 ip daddr 192.168.41.0/24 accept
+        ip saddr 172.22.196.0/24 ip daddr 172.31.204.0/24 drop
+        ip saddr 10.68.198.0/24 ip daddr 192.168.124.0/24 ip protocol 6 dport 25 drop
+        ip saddr 10.151.156.0/24 ip daddr 192.168.228.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 10.110.192.0/24 ip daddr 192.168.214.0/24 ip protocol 17 dport 3306 drop
+        ip saddr 10.198.60.0/24 ip daddr 192.168.134.0/24 ip protocol 17 dport 25 drop
+        ip saddr 10.233.76.0/24 ip daddr 192.168.71.0/24 ip protocol 17 dport 110 drop
+        ip saddr 10.134.91.0/24 ip daddr 172.19.152.0/24 accept
+        ip saddr 10.245.87.0/24 ip daddr 192.168.194.0/24 ip protocol 6 dport 443 drop
+        ip saddr 10.202.176.0/24 ip daddr 192.168.74.0/24 ip protocol 6 dport 25 drop
+        ip saddr 10.81.15.0/24 ip daddr 192.168.73.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 10.218.55.0/24 ip daddr 192.168.251.0/24 ip protocol 17 dport 389 drop
+        ip saddr 10.249.79.0/24 ip daddr 172.22.151.0/24 ip protocol 6 accept
+        ip saddr 10.170.124.0/24 ip daddr 192.168.64.0/24 ip protocol 6 dport 27017 drop
+        ip saddr 172.25.116.0/24 ip daddr 172.18.222.0/24 drop
+        ip saddr 192.168.134.0/24 ip daddr 192.168.219.0/24 ip protocol 17 dport 143 accept
+        ip saddr 10.226.212.0/24 ip daddr 192.168.139.0/24 ip protocol 6 dport 53 drop
+        ip saddr 10.129.181.0/24 ip daddr 192.168.136.0/24 ip protocol 6 dport 143 drop
+        ip saddr 10.115.177.0/24 ip daddr 192.168.145.0/24 ip protocol 17 dport 80 drop
+        ip saddr 172.30.128.0/24 ip daddr 172.16.58.0/24 ip protocol 17 dport 5432 drop
+        ip saddr 10.170.210.0/24 ip daddr 172.23.136.0/24 accept
+        ip saddr 192.168.10.0/24 ip daddr 192.168.137.0/24 ip protocol 17 dport 443 accept
+        ip saddr 10.40.230.0/24 ip daddr 192.168.189.0/24 ip protocol 6 dport 80 drop
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 drop
+        ip saddr 10.207.235.0/24 ip daddr 192.168.124.0/24 ip protocol 6 dport 389 drop
+        ip saddr 10.72.179.0/24 ip daddr 192.168.158.0/24 ip protocol 17 dport 6379 drop
+        ip saddr 10.159.166.0/24 ip daddr 192.168.43.0/24 ip protocol 6 dport 22 drop
+        ip saddr 10.92.150.0/24 ip daddr 192.168.164.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.240.245.0/24 ip daddr 172.30.174.0/24 ip protocol 6 accept
+        ip saddr 192.168.171.0/24 ip daddr 192.168.47.0/24 accept
+        ip saddr 10.98.89.0/24 ip daddr 192.168.207.0/24 ip protocol 17 dport 143 drop
+        ip saddr 10.180.86.0/24 ip daddr 192.168.71.0/24 ip protocol 17 dport 389 drop
+        ip saddr 10.192.203.0/24 ip daddr 172.22.38.0/24 ip protocol 6 dport 6379 accept
+        ip saddr 192.168.235.0/24 ip daddr 192.168.78.0/24 accept
+        ip saddr 10.187.23.0/24 ip daddr 192.168.205.0/24 ip protocol 6 dport 22 drop
+        ip saddr 10.121.227.0/24 ip daddr 192.168.145.0/24 ip protocol 17 dport 389 drop
+        ip saddr 10.158.173.0/24 ip daddr 192.168.113.0/24 ip protocol 6 dport 110 drop
+        ip saddr 10.201.234.0/24 ip daddr 192.168.123.0/24 ip protocol 17 dport 53 drop
+        ip saddr 10.115.203.0/24 ip daddr 192.168.187.0/24 ip protocol 17 dport 80 drop
+        ip saddr 10.26.51.0/24 ip daddr 192.168.211.0/24 ip protocol 17 dport 110 drop
+        ip saddr 10.28.150.0/24 ip daddr 172.27.191.0/24 ip protocol 6 accept
+        ip saddr 10.243.28.0/24 ip daddr 192.168.4.0/24 ip protocol 6 dport 389 drop
+        ip saddr 10.108.79.0/24 ip daddr 192.168.246.0/24 ip protocol 6 dport 53 drop
+        ip saddr 10.232.46.0/24 ip daddr 192.168.108.0/24 ip protocol 6 dport 6379 drop
+        ip saddr 192.168.4.0/24 ip daddr 192.168.57.0/24 accept
+        ip saddr 10.222.140.0/24 ip daddr 192.168.29.0/24 ip protocol 17 dport 80 drop
+        ip saddr 10.205.35.0/24 ip daddr 192.168.72.0/24 ip protocol 6 dport 389 drop
+        ip saddr 10.154.247.0/24 ip daddr 192.168.125.0/24 ip protocol 17 dport 6379 drop
+        ip saddr 10.176.204.0/24 ip daddr 192.168.66.0/24 ip protocol 6 dport 110 drop
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 accept
+        ip saddr 10.237.25.0/24 ip daddr 172.23.62.0/24 ip protocol 17 accept
+        ip saddr 10.216.26.0/24 ip daddr 192.168.147.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 10.28.63.0/24 ip daddr 192.168.78.0/24 ip protocol 6 dport 25 drop
+        ip saddr 10.68.239.0/24 ip daddr 192.168.139.0/24 ip protocol 6 dport 53 drop
+        ip saddr 10.238.62.0/24 ip daddr 192.168.136.0/24 ip protocol 6 dport 3306 drop
+        ip saddr 10.197.145.0/24 ip daddr 192.168.129.0/24 ip protocol 6 dport 389 drop
+        ip saddr 10.166.195.0/24 ip daddr 192.168.150.0/24 ip protocol 17 dport 3306 drop
+        ip saddr 10.70.130.0/24 ip daddr 192.168.148.0/24 ip protocol 6 dport 110 drop
+        ip saddr 10.124.223.0/24 ip daddr 192.168.205.0/24 ip protocol 6 dport 5432 drop
+        ip saddr 10.175.181.0/24 ip daddr 192.168.135.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 10.56.145.0/24 ip daddr 192.168.249.0/24 ip protocol 17 dport 5432 drop
+        ip saddr 10.147.121.0/24 ip daddr 192.168.154.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.184.34.0/24 ip daddr 192.168.10.0/24 ip protocol 17 dport 143 drop
+        ip saddr 10.32.234.0/24 ip daddr 192.168.18.0/24 ip protocol 6 dport 25 drop
+        ip saddr 10.254.188.0/24 ip daddr 192.168.136.0/24 ip protocol 17 dport 80 drop
+        ip saddr 10.109.103.0/24 ip daddr 192.168.138.0/24 ip protocol 17 dport 5432 drop
+        ip saddr 10.217.194.0/24 ip daddr 192.168.117.0/24 ip protocol 17 dport 53 drop
+        ip saddr 10.13.212.0/24 ip daddr 192.168.27.0/24 ip protocol 17 dport 143 drop
+        ip saddr 10.143.60.0/24 ip daddr 192.168.65.0/24 ip protocol 17 dport 80 drop
+        ip saddr 10.231.19.0/24 ip daddr 192.168.29.0/24 ip protocol 17 dport 110 drop
+        ip saddr 10.41.164.0/24 ip daddr 192.168.75.0/24 ip protocol 6 dport 80 drop
+        ip saddr 10.25.148.0/24 ip daddr 192.168.196.0/24 ip protocol 17 dport 27017 drop
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 accept
+        ip saddr 10.160.130.0/24 ip daddr 192.168.191.0/24 ip protocol 17 dport 443 drop
+    }
+}

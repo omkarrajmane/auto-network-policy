@@ -1,0 +1,22 @@
+{
+  "experiment_name": "llm_cold_start_redundant_shadowing",
+  "scenario": "redundant_shadowing",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-17T17:04:39.180146",
+  "end_time": "2026-03-17T17:04:55.067570",
+  "total_iterations": 5,
+  "successful_mutations": 5,
+  "failed_mutations": 0,
+  "rejected_mutations": 0,
+  "baseline_score": 399.0,
+  "best_score": 960.6,
+  "improvement_pct": 140.75187969924812,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 13361.396789550781,
+  "avg_iteration_time_ms": 3177.483034133911,
+  "mutation_type_distribution": {
+    "remove_shadowed": 4,
+    "merge_adjacent": 1
+  },
+  "verification_pass_rate": 1.0
+}

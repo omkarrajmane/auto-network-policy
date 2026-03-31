@@ -1,0 +1,257 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080 [expanded-1]
+        ip saddr 10.243.6.0/26 ip daddr 10.243.2.0/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443 [expanded-2]
+        ip saddr 10.243.0.64/26 ip daddr 10.243.10.64/26 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432 [expanded-3]
+        ip saddr 10.243.3.128/26 ip daddr 10.243.5.128/26 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53 [expanded-4]
+        ip saddr 10.243.0.192/26 ip daddr 10.241.0.192/26 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53 [expanded-5]
+        ip saddr 10.243.0.0/26 ip daddr 10.241.0.0/26 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-6]
+        ip saddr 10.243.1.64/26 ip daddr 10.243.7.64/26 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443 [expanded-7]
+        ip saddr 10.243.1.128/26 ip daddr 10.243.7.128/26 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379 [expanded-8]
+        ip saddr 10.243.4.192/26 ip daddr 10.243.8.192/26 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-9]
+        ip saddr 10.243.8.0/26 ip daddr 10.243.4.0/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080 [expanded-10]
+        ip saddr 10.244.4.64/26 ip daddr 10.244.2.64/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306 [expanded-11]
+        ip saddr 10.244.1.128/26 ip daddr 10.244.3.128/26 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443 [expanded-12]
+        ip saddr 10.244.0.192/26 ip daddr 10.244.5.192/26 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443 [expanded-13]
+        ip saddr 10.244.5.0/26 ip daddr 10.244.0.0/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080 [expanded-14]
+        ip saddr 10.242.2.64/26 ip daddr 10.243.0.64/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443 [expanded-15]
+        ip saddr 10.242.2.128/26 ip daddr 10.243.0.128/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080 [expanded-16]
+        ip saddr 10.242.2.192/26 ip daddr 10.244.0.192/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000 [expanded-17]
+        ip saddr 10.242.1.0/26 ip daddr 10.242.0.0/26 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080 [expanded-18]
+        ip saddr 10.240.3.64/26 ip daddr 10.240.1.64/26 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379 [expanded-19]
+        ip saddr 10.240.1.128/26 ip daddr 10.240.2.128/26 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53 [expanded-20]
+        ip saddr 10.240.0.192/26 ip daddr 10.241.0.192/26 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-21]
+        ip saddr 10.240.0.0/26 ip daddr 10.243.11.0/26 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-22]
+        ip saddr 10.243.12.64/26 ip daddr 10.243.11.64/26 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-23]
+        ip saddr 10.244.0.128/26 ip daddr 10.243.7.128/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-24]
+        ip saddr 10.243.9.192/26 ip daddr 10.243.7.192/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-25]
+        ip saddr 10.243.7.0/26 ip daddr 10.243.4.0/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080 [expanded-26]
+        ip saddr 10.243.6.64/26 ip daddr 10.243.2.64/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443 [expanded-27]
+        ip saddr 10.243.0.128/26 ip daddr 10.243.10.128/26 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432 [expanded-28]
+        ip saddr 10.243.3.192/26 ip daddr 10.243.5.192/26 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53 [expanded-29]
+        ip saddr 10.243.0.0/26 ip daddr 10.241.0.0/26 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53 [expanded-30]
+        ip saddr 10.243.0.64/26 ip daddr 10.241.0.64/26 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-31]
+        ip saddr 10.243.1.128/26 ip daddr 10.243.7.128/26 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443 [expanded-32]
+        ip saddr 10.243.1.192/26 ip daddr 10.243.7.192/26 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379 [expanded-33]
+        ip saddr 10.243.4.0/26 ip daddr 10.243.8.0/26 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-34]
+        ip saddr 10.243.8.64/26 ip daddr 10.243.4.64/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080 [expanded-35]
+        ip saddr 10.244.4.128/26 ip daddr 10.244.2.128/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306 [expanded-36]
+        ip saddr 10.244.1.192/26 ip daddr 10.244.3.192/26 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443 [expanded-37]
+        ip saddr 10.244.0.0/26 ip daddr 10.244.5.0/26 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443 [expanded-38]
+        ip saddr 10.244.5.64/26 ip daddr 10.244.0.64/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080 [expanded-39]
+        ip saddr 10.242.2.128/26 ip daddr 10.243.0.128/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443 [expanded-40]
+        ip saddr 10.242.2.192/26 ip daddr 10.243.0.192/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080 [expanded-41]
+        ip saddr 10.242.2.0/26 ip daddr 10.244.0.0/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000 [expanded-42]
+        ip saddr 10.242.1.64/26 ip daddr 10.242.0.64/26 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080 [expanded-43]
+        ip saddr 10.240.3.128/26 ip daddr 10.240.1.128/26 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379 [expanded-44]
+        ip saddr 10.240.1.192/26 ip daddr 10.240.2.192/26 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53 [expanded-45]
+        ip saddr 10.240.0.0/26 ip daddr 10.241.0.0/26 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-46]
+        ip saddr 10.240.0.64/26 ip daddr 10.243.11.64/26 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-47]
+        ip saddr 10.243.12.128/26 ip daddr 10.243.11.128/26 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-48]
+        ip saddr 10.244.0.192/26 ip daddr 10.243.7.192/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-49]
+        ip saddr 10.243.9.0/26 ip daddr 10.243.7.0/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-50]
+        ip saddr 10.243.7.64/26 ip daddr 10.243.4.64/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080 [expanded-51]
+        ip saddr 10.243.6.128/26 ip daddr 10.243.2.128/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443 [expanded-52]
+        ip saddr 10.243.0.192/26 ip daddr 10.243.10.192/26 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432 [expanded-53]
+        ip saddr 10.243.3.0/26 ip daddr 10.243.5.0/26 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53 [expanded-54]
+        ip saddr 10.243.0.64/26 ip daddr 10.241.0.64/26 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53 [expanded-55]
+        ip saddr 10.243.0.128/26 ip daddr 10.241.0.128/26 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-56]
+        ip saddr 10.243.1.192/26 ip daddr 10.243.7.192/26 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443 [expanded-57]
+        ip saddr 10.243.1.0/26 ip daddr 10.243.7.0/26 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379 [expanded-58]
+        ip saddr 10.243.4.64/26 ip daddr 10.243.8.64/26 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-59]
+        ip saddr 10.243.8.128/26 ip daddr 10.243.4.128/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080 [expanded-60]
+        ip saddr 10.244.4.192/26 ip daddr 10.244.2.192/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306 [expanded-61]
+        ip saddr 10.244.1.0/26 ip daddr 10.244.3.0/26 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443 [expanded-62]
+        ip saddr 10.244.0.64/26 ip daddr 10.244.5.64/26 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443 [expanded-63]
+        ip saddr 10.244.5.128/26 ip daddr 10.244.0.128/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080 [expanded-64]
+        ip saddr 10.242.2.192/26 ip daddr 10.243.0.192/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443 [expanded-65]
+        ip saddr 10.242.2.0/26 ip daddr 10.243.0.0/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080 [expanded-66]
+        ip saddr 10.242.2.64/26 ip daddr 10.244.0.64/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000 [expanded-67]
+        ip saddr 10.242.1.128/26 ip daddr 10.242.0.128/26 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080 [expanded-68]
+        ip saddr 10.240.3.192/26 ip daddr 10.240.1.192/26 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379 [expanded-69]
+        ip saddr 10.240.1.0/26 ip daddr 10.240.2.0/26 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53 [expanded-70]
+        ip saddr 10.240.0.64/26 ip daddr 10.241.0.64/26 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-71]
+        ip saddr 10.240.0.128/26 ip daddr 10.243.11.128/26 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-72]
+        ip saddr 10.243.12.192/26 ip daddr 10.243.11.192/26 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-73]
+        ip saddr 10.244.0.0/26 ip daddr 10.243.7.0/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-74]
+        ip saddr 10.243.9.64/26 ip daddr 10.243.7.64/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-75]
+        ip saddr 10.243.7.128/26 ip daddr 10.243.4.128/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080 [expanded-76]
+        ip saddr 10.243.6.192/26 ip daddr 10.243.2.192/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443 [expanded-77]
+        ip saddr 10.243.0.0/26 ip daddr 10.243.10.0/26 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432 [expanded-78]
+        ip saddr 10.243.3.64/26 ip daddr 10.243.5.64/26 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53 [expanded-79]
+        ip saddr 10.243.0.128/26 ip daddr 10.241.0.128/26 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53 [expanded-80]
+        ip saddr 10.243.0.192/26 ip daddr 10.241.0.192/26 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-81]
+        ip saddr 10.243.1.0/26 ip daddr 10.243.7.0/26 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443 [expanded-82]
+        ip saddr 10.243.1.64/26 ip daddr 10.243.7.64/26 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379 [expanded-83]
+        ip saddr 10.243.4.128/26 ip daddr 10.243.8.128/26 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-84]
+        ip saddr 10.243.8.192/26 ip daddr 10.243.4.192/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080 [expanded-85]
+        ip saddr 10.244.4.0/26 ip daddr 10.244.2.0/26 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306 [expanded-86]
+        ip saddr 10.244.1.64/26 ip daddr 10.244.3.64/26 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443 [expanded-87]
+        ip saddr 10.244.0.128/26 ip daddr 10.244.5.128/26 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443 [expanded-88]
+        ip saddr 10.244.5.192/26 ip daddr 10.244.0.192/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080 [expanded-89]
+        ip saddr 10.242.2.0/26 ip daddr 10.243.0.0/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443 [expanded-90]
+        ip saddr 10.242.2.64/26 ip daddr 10.243.0.64/26 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080 [expanded-91]
+        ip saddr 10.242.2.128/26 ip daddr 10.244.0.128/26 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000 [expanded-92]
+        ip saddr 10.242.1.192/26 ip daddr 10.242.0.192/26 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080 [expanded-93]
+        ip saddr 10.240.3.0/26 ip daddr 10.240.1.0/26 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379 [expanded-94]
+        ip saddr 10.240.1.64/26 ip daddr 10.240.2.64/26 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53 [expanded-95]
+        ip saddr 10.240.0.128/26 ip daddr 10.241.0.128/26 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-96]
+        ip saddr 10.240.0.192/26 ip daddr 10.243.11.192/26 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443 [expanded-97]
+        ip saddr 10.243.12.0/26 ip daddr 10.243.11.0/26 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-98]
+        ip saddr 10.244.0.64/26 ip daddr 10.243.7.64/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80 [expanded-99]
+        ip saddr 10.243.9.128/26 ip daddr 10.243.7.128/26 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080 [expanded-100]
+        ip saddr 10.243.7.192/26 ip daddr 10.243.4.192/26 ip protocol 6 dport 8080 accept
+        # Policy: allow-frontend-to-backend (namespace: production) - From: production[app=frontend,environment=prod,tier=web] -> To: production[app=backend,environment=prod,tier=api], port TCP/8080
+        ip saddr 10.243.6.0/24 ip daddr 10.243.2.0/24 ip protocol 6 dport 8080 accept
+        # Policy: allow-monitoring-to-prod (namespace: production) - From: production[all] -> To: production[environment=prod], port TCP/443
+        ip saddr 10.243.0.0/24 ip daddr 10.243.10.0/24 ip protocol 6 dport 443 accept
+        # Policy: backend-egress-database (namespace: production) - From: production[app=backend,role=service,tier=api] -> To: production[app=database,role=primary,tier=data], port TCP/5432
+        ip saddr 10.243.3.0/24 ip daddr 10.243.5.0/24 ip protocol 6 dport 5432 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port UDP/53
+        ip saddr 10.243.0.0/24 ip daddr 10.241.0.0/24 ip protocol 17 dport 53 accept
+        # Policy: allow-all-dns-egress (namespace: production) - From: production[all] -> To: kube-system[all], port TCP/53
+        ip saddr 10.243.0.0/24 ip daddr 10.241.0.0/24 ip protocol 6 dport 53 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.243.1.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: frontend-ingress-from-gateway (namespace: production) - From: production[app=api-gateway,role=ingress] -> To: production[app=frontend,tier=web], port TCP/443
+        ip saddr 10.243.1.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 443 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=backend,tier=api] -> To: production[app=redis,role=session,tier=cache], port TCP/6379
+        ip saddr 10.243.4.0/24 ip daddr 10.243.8.0/24 ip protocol 6 dport 6379 accept
+        # Policy: cache-ingress-egress (namespace: production) - From: production[app=redis,role=session,tier=cache] -> To: production[app=backend,tier=api], port TCP/8080
+        ip saddr 10.243.8.0/24 ip daddr 10.243.4.0/24 ip protocol 6 dport 8080 accept
+        # Policy: staging-web-to-staging-api (namespace: staging) - From: staging[app=web,environment=staging,tier=web] -> To: staging[app=api,environment=staging,tier=api], port TCP/8080
+        ip saddr 10.244.4.0/24 ip daddr 10.244.2.0/24 ip protocol 6 dport 8080 accept
+        # Policy: staging-api-egress-mysql (namespace: staging) - From: staging[app=api,environment=staging] -> To: staging[app=mysql,environment=staging,role=primary], port TCP/3306
+        ip saddr 10.244.1.0/24 ip daddr 10.244.3.0/24 ip protocol 6 dport 3306 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[all] -> To: staging[environment=staging], port TCP/443
+        ip saddr 10.244.0.0/24 ip daddr 10.244.5.0/24 ip protocol 6 dport 443 accept
+        # Policy: staging-observability-access (namespace: staging) - From: staging[environment=staging] -> To: staging[all], port TCP/443
+        ip saddr 10.244.5.0/24 ip daddr 10.244.0.0/24 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/8080
+        ip saddr 10.242.2.0/24 ip daddr 10.243.0.0/24 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-scrape-production (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: production[all], port TCP/443
+        ip saddr 10.242.2.0/24 ip daddr 10.243.0.0/24 ip protocol 6 dport 443 accept
+        # Policy: monitoring-scrape-staging (namespace: monitoring) - From: monitoring[app=prometheus,role=collector] -> To: staging[all], port TCP/8080
+        ip saddr 10.242.2.0/24 ip daddr 10.244.0.0/24 ip protocol 6 dport 8080 accept
+        # Policy: monitoring-ingress-grafana (namespace: monitoring) - From: monitoring[app=ops-portal,role=admin] -> To: monitoring[app=grafana,tier=ui], port TCP/3000
+        ip saddr 10.242.1.0/24 ip daddr 10.242.0.0/24 ip protocol 6 dport 3000 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=worker,role=batch] -> To: default[app=internal-api,role=service], port TCP/8080
+        ip saddr 10.240.3.0/24 ip daddr 10.240.1.0/24 ip protocol 6 dport 8080 accept
+        # Policy: default-namespace-api-protection (namespace: default) - From: default[app=internal-api,role=service] -> To: default[app=redis,tier=cache], port TCP/6379
+        ip saddr 10.240.1.0/24 ip daddr 10.240.2.0/24 ip protocol 6 dport 6379 accept
+        # Policy: default-egress-dns (namespace: default) - From: default[all] -> To: kube-system[all], port UDP/53
+        ip saddr 10.240.0.0/24 ip daddr 10.241.0.0/24 ip protocol 17 dport 53 accept
+        # Policy: production-admin-access (namespace: production) - From: default[all] -> To: production[environment=prod,role=admin-endpoint], port TCP/443
+        ip saddr 10.240.0.0/24 ip daddr 10.243.11.0/24 ip protocol 6 dport 443 accept
+        # Policy: production-admin-access (namespace: production) - From: production[role=admin] -> To: production[environment=prod,role=admin-endpoint], port TCP/443
+        ip saddr 10.243.12.0/24 ip daddr 10.243.11.0/24 ip protocol 6 dport 443 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: staging[all] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.244.0.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=staging-proxy,environment=staging] -> To: production[app=frontend,tier=web], port TCP/80
+        ip saddr 10.243.9.0/24 ip daddr 10.243.7.0/24 ip protocol 6 dport 80 accept
+        # Policy: cross-namespace-frontend-proxy (namespace: production) - From: production[app=frontend,tier=web] -> To: production[app=backend,tier=api], port TCP/8080
+        ip saddr 10.243.7.0/24 ip daddr 10.243.4.0/24 ip protocol 6 dport 8080 accept
+        drop
+    }
+}

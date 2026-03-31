@@ -1,0 +1,507 @@
+table inet filter {
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        ip saddr 192.168.57.0/24 ip daddr 172.23.214.39/20 ip protocol 6 sport 30000-35697 dport 80-83 accept
+        ip saddr 192.168.13.150/32 ip daddr 192.168.214.203/24 ip protocol 6 sport 80-177 dport 10000-32298 accept
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 17 sport 1-49151 dport 1-49151 drop
+        ip saddr 172.19.69.78/20 ip daddr 10.183.204.37/32 ip protocol 6 sport 80-173 dport 80-128 accept
+        ip saddr 192.168.185.40/32 ip daddr 192.168.35.156/24 ip protocol 6 sport 8080 dport 1024-57809 accept
+        ip saddr 192.168.186.203/24 ip daddr 172.22.180.72/28 ip protocol 6 sport 0-22431 dport 443-463 accept
+        ip saddr 192.168.112.113/32 ip daddr 10.117.69.201/32 ip protocol 1 drop
+        ip saddr 192.168.159.255/32 ip daddr 172.16.88.86/28 ip protocol 17 dport 53 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 dport 1024-65535 drop
+        ip saddr 10.125.142.245/24 ip daddr 192.168.39.250/32 ip protocol 6 dport 22 accept
+        ip saddr 172.22.205.214/28 ip daddr 172.30.174.234/20 ip protocol 6 sport 143 dport 8000-8095 drop
+        ip saddr 172.27.149.121/20 ip daddr 10.252.174.27/16 ip protocol 17 sport 53 dport 80 accept
+        ip saddr 10.197.0.56/24 ip daddr 172.24.11.149/12 ip protocol 6 sport 0-15014 dport 9000-9096 accept
+        ip saddr 10.150.69.166/24 ip daddr 172.16.26.149/12 ip protocol 17 sport 8000-40806 dport 30000-36973 accept
+        ip saddr 192.168.101.215/24 ip daddr 10.0.74.245/24 ip protocol 6 sport 80-126 dport 8000-23692 drop
+        ip saddr 10.43.218.196/32 ip daddr 10.64.99.174/16 ip protocol 17 sport 9000-9021 dport 110 drop
+        ip saddr 192.168.102.253/32 ip daddr 172.27.243.15/28 ip protocol 6 sport 80-111 dport 3306 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 dport 1024-65535 drop
+        ip saddr 192.168.112.192/24 ip daddr 192.168.30.36/24 ip protocol 6 sport 8000-12643 dport 8000-8085 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 1 drop
+        ip saddr 192.168.242.1/24 ip daddr 172.29.6.162/20 ip protocol 6 sport 5432 dport 5432 drop
+        ip saddr 192.168.50.99/24 ip daddr 192.168.173.185/32 ip protocol 6 sport 443 dport 6379 accept
+        ip saddr 172.23.254.106/32 ip daddr 10.226.226.8/32 ip protocol 1 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 dport 1-1023 accept
+        ip saddr 10.85.38.186/24 ip daddr 172.22.215.4/32 ip protocol 6 sport 1024-25860 dport 5432 drop
+        ip saddr 172.25.32.194/28 ip daddr 192.168.249.44/24 ip protocol 17 sport 22 dport 9000-9007 accept
+        ip saddr 192.168.244.29/32 ip daddr 192.168.80.155/24 ip protocol 6 sport 443-451 dport 443-494 drop
+        ip saddr 10.20.89.4/24 ip daddr 172.26.31.179/12 ip protocol 6 sport 143 dport 8080 accept
+        ip saddr 172.30.161.149/28 ip daddr 10.4.196.254/24 ip protocol 6 sport 0-9602 dport 9000-9033 accept
+        ip saddr 10.125.18.216/24 ip daddr 10.224.89.186/32 ip protocol 6 sport 30000-64664 dport 110 drop
+        ip saddr 10.68.193.206/16 ip daddr 10.79.150.222/16 ip protocol 6 sport 8000-8026 dport 8000-8064 drop
+        ip saddr 10.47.65.190/24 ip daddr 172.17.105.40/20 ip protocol 6 sport 8000-18589 dport 30000-58028 accept
+        ip saddr 192.168.76.80/32 ip daddr 172.20.189.47/28 ip protocol 6 sport 3306 dport 0-46898 accept
+        ip saddr 10.181.21.93/32 ip daddr 172.20.242.25/12 ip protocol 6 sport 80 dport 1024-58788 accept
+        ip saddr 172.29.44.193/32 ip daddr 192.168.127.15/24 ip protocol 6 sport 0-50140 dport 10000-24577 drop
+        ip saddr 172.25.196.31/32 ip daddr 10.114.35.9/16 ip protocol 1 accept
+        ip saddr 192.168.204.162/32 ip daddr 192.168.169.140/16 ip protocol 6 sport 8080 dport 8080 accept
+        ip saddr 172.26.9.165/28 ip daddr 192.168.59.53/32 ip protocol 6 sport 8000-8005 dport 0-25825 accept
+        ip saddr 192.168.169.15/32 ip daddr 192.168.63.206/32 ip protocol 17 sport 8080 dport 8000-8051 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 17 dport 1-1023 drop
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 6 sport 1024-65535 dport 1024-65535 drop
+        ip saddr 10.215.68.189/24 ip daddr 172.21.145.161/28 ip protocol 6 sport 27017 dport 8000-26803 drop
+        ip saddr 192.168.164.253/32 ip daddr 172.22.214.164/28 ip protocol 17 sport 1024-44202 dport 27017 accept
+        ip saddr 10.120.64.178/24 ip daddr 10.101.244.91/16 ip protocol 6 sport 6379 dport 80-138 accept
+        ip saddr 10.196.152.211/24 ip daddr 10.75.142.120/24 ip protocol 6 sport 993 dport 0-55724 drop
+        ip saddr 192.168.237.217/24 ip daddr 10.62.34.182/24 ip protocol 17 sport 30000-50794 dport 10000-50150 drop
+        ip saddr 172.30.68.236/32 ip daddr 192.168.243.8/32 ip protocol 6 sport 8000-58188 dport 10000-51074 accept
+        ip saddr 192.168.146.74/24 ip daddr 172.26.59.15/32 ip protocol 6 sport 80 dport 143 accept
+        ip saddr 172.29.11.13/28 ip daddr 172.29.78.5/20 ip protocol 6 sport 10000-60449 dport 80-177 accept
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 17 sport 1024-65535 dport 1-49151 accept
+        ip saddr 172.25.142.60/32 ip daddr 172.23.14.167/28 ip protocol 17 sport 6379 dport 3306 drop
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1024-65535 accept
+        ip saddr 192.168.84.128/32 ip daddr 10.13.206.139/8 ip protocol 6 sport 80-90 dport 443-502 accept
+        ip saddr 172.22.197.235/28 ip daddr 172.28.33.205/20 ip protocol 17 sport 10000-26532 dport 10000-11270 accept
+        ip saddr 172.23.44.211/28 ip daddr 192.168.20.156/32 ip protocol 6 sport 1024-56023 dport 80 accept
+        ip saddr 10.111.153.12/24 ip daddr 172.27.205.253/20 ip protocol 6 sport 80-179 dport 8000-15084 drop
+        ip saddr 192.168.192.40/32 ip daddr 192.168.101.139/24 ip protocol 17 sport 443-456 dport 8000-8087 accept
+        ip saddr 192.168.21.7/32 ip daddr 172.27.219.183/20 ip protocol 1 accept
+        ip saddr 172.20.229.77/28 ip daddr 192.168.138.72/32 ip protocol 6 sport 10000-40465 dport 9000-9034 accept
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 6 accept
+        ip saddr 10.142.207.174/32 ip daddr 10.237.238.68/24 ip protocol 6 sport 8000-8003 dport 8000-8023 accept
+        ip saddr 172.26.228.14/20 ip daddr 192.168.141.115/32 ip protocol 6 sport 443-453 dport 5432 drop
+        ip saddr 192.168.243.194/32 ip daddr 172.30.87.114/32 ip protocol 17 sport 443 dport 443-482 accept
+        ip saddr 192.168.176.0/32 ip daddr 192.168.169.93/32 ip protocol 6 sport 8000-8032 dport 143 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 17 sport 1-49151 dport 1-1023 accept
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-49151 dport 1024-65535 drop
+        ip saddr 192.168.94.203/24 ip daddr 192.168.247.232/24 ip protocol 17 sport 9000-9076 dport 53 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 6 dport 1-49151 accept
+        ip saddr 172.21.189.252/28 ip daddr 192.168.64.207/24 ip protocol 17 sport 30000-49145 dport 443-524 accept
+        ip saddr 10.145.148.236/24 ip daddr 172.26.231.16/20 ip protocol 6 sport 110 dport 80-131 accept
+        ip saddr 192.168.27.114/24 ip daddr 192.168.155.144/24 ip protocol 17 sport 27017 dport 30000-44790 accept
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 1 accept
+        ip saddr 172.25.131.234/32 ip daddr 172.25.197.172/28 ip protocol 6 sport 143 dport 993 accept
+        ip saddr 192.168.41.145/24 ip daddr 10.38.110.231/16 ip protocol 6 sport 9000-9060 dport 443 accept
+        ip saddr 172.18.71.26/28 ip daddr 172.22.84.136/28 ip protocol 6 sport 443-477 dport 0-7816 accept
+        ip saddr 192.168.147.196/32 ip daddr 172.25.187.29/28 ip protocol 6 sport 30000-65388 dport 80-156 accept
+        ip saddr 172.24.3.3/20 ip daddr 10.10.159.37/8 ip protocol 6 sport 8000-8073 dport 993 accept
+        ip saddr 172.24.230.168/20 ip daddr 192.168.223.44/32 ip protocol 6 sport 80-140 dport 3306 accept
+        ip saddr 10.168.220.6/24 ip daddr 172.25.57.20/28 ip protocol 6 sport 9000-9004 dport 8000-8032 drop
+        ip saddr 172.16.9.109/28 ip daddr 192.168.236.136/32 ip protocol 6 sport 3306 dport 8080-8160 accept
+        ip saddr 172.20.49.66/12 ip daddr 172.31.130.194/20 ip protocol 6 sport 30000-45682 dport 8000-44099 accept
+        ip saddr 10.58.23.147/24 ip daddr 10.78.213.77/24 ip protocol 6 sport 30000-47919 dport 8080-8140 accept
+        ip saddr 172.22.25.122/12 ip daddr 192.168.69.228/32 ip protocol 6 sport 993 dport 8000-59623 drop
+        ip saddr 172.25.141.196/32 ip daddr 192.168.250.178/32 ip protocol 6 sport 8080-8124 dport 993 accept
+        ip saddr 172.22.9.112/12 ip daddr 10.196.20.193/16 ip protocol 1 drop
+        ip saddr 192.168.77.224/32 ip daddr 10.64.163.89/24 ip protocol 6 sport 80-136 dport 995 drop
+        ip saddr 172.20.240.134/20 ip daddr 172.26.213.126/28 ip protocol 1 accept
+        ip saddr 172.17.38.21/28 ip daddr 10.147.35.87/8 ip protocol 6 sport 10000-16451 dport 0-58153 accept
+        ip saddr 10.23.140.32/24 ip daddr 10.150.52.77/24 ip protocol 6 sport 443-510 dport 443-464 accept
+        ip saddr 172.23.180.224/28 ip daddr 192.168.73.70/24 ip protocol 17 sport 8080-8112 dport 8080-8116 accept
+        ip saddr 172.27.14.223/12 ip daddr 172.29.147.240/28 ip protocol 6 sport 8000-8025 dport 10000-16989 accept
+        ip saddr 192.168.151.124/16 ip daddr 172.16.179.186/12 ip protocol 17 sport 8000-8001 dport 80-157 drop
+        ip saddr 172.23.93.33/28 ip daddr 172.23.2.21/28 ip protocol 17 sport 443-523 dport 465 accept
+        ip saddr 172.17.17.82/28 ip daddr 192.168.67.72/24 ip protocol 17 sport 143 dport 443-459 drop
+        ip saddr 172.24.184.139/32 ip daddr 172.31.107.76/12 ip protocol 6 sport 110 dport 53 accept
+        ip saddr 10.203.121.132/8 ip daddr 192.168.187.70/24 ip protocol 17 sport 8080 dport 8080-8127 accept
+        ip saddr 192.168.195.21/32 ip daddr 172.19.119.146/28 ip protocol 6 sport 9000-9071 dport 25 accept
+        ip saddr 172.25.171.138/28 ip daddr 10.71.144.218/16 ip protocol 17 sport 6379 dport 443 accept
+        ip saddr 172.27.223.83/28 ip daddr 192.168.214.151/32 ip protocol 17 sport 10000-52920 dport 6379 drop
+        ip saddr 172.17.12.3/28 ip daddr 10.227.3.27/24 ip protocol 6 sport 3306 dport 465 drop
+        ip saddr 192.168.183.164/24 ip daddr 172.22.18.233/12 ip protocol 6 sport 10000-16007 dport 9000-9002 accept
+        ip saddr 10.105.16.180/16 ip daddr 192.168.106.16/32 ip protocol 6 sport 1024-22556 dport 30000-30185 drop
+        ip saddr 10.128.85.191/32 ip daddr 10.13.51.14/16 ip protocol 6 sport 993 dport 3306 accept
+        ip saddr 10.215.136.36/24 ip daddr 192.168.32.138/32 ip protocol 6 sport 30000-37146 dport 443-521 drop
+        ip saddr 192.168.154.111/32 ip daddr 10.31.36.129/8 ip protocol 1 accept
+        ip saddr 10.164.235.215/24 ip daddr 10.64.156.47/16 ip protocol 6 sport 9000-9091 dport 25 accept
+        ip saddr 192.168.220.67/24 ip daddr 192.168.58.148/32 ip protocol 17 sport 9000-9092 dport 10000-39593 accept
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 172.28.194.101/28 ip daddr 10.160.6.86/24 ip protocol 6 sport 8000-8019 dport 8080-8088 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-49151 dport 1-49151 drop
+        ip saddr 172.19.23.14/32 ip daddr 172.20.41.231/28 ip protocol 6 sport 9000-9071 dport 53 drop
+        ip saddr 172.17.165.114/12 ip daddr 192.168.159.249/32 ip protocol 6 sport 443-462 dport 443-456 accept
+        ip saddr 10.142.160.126/24 ip daddr 172.16.215.18/28 ip protocol 17 sport 8000-8003 dport 143 drop
+        ip saddr 172.16.50.4/20 ip daddr 10.205.51.155/16 ip protocol 6 sport 0-12026 dport 1024-25678 accept
+        ip saddr 172.25.248.238/32 ip daddr 192.168.43.127/32 ip protocol 6 sport 993 dport 80-114 accept
+        ip saddr 192.168.226.83/32 ip daddr 10.58.70.73/24 ip protocol 17 sport 465 dport 8080-8147 accept
+        ip saddr 172.17.192.198/20 ip daddr 172.22.194.109/32 ip protocol 17 sport 8000-29503 dport 6379 accept
+        ip saddr 172.23.93.17/28 ip daddr 192.168.181.85/24 ip protocol 6 sport 0-57176 dport 995 accept
+        ip saddr 172.28.241.8/32 ip daddr 172.25.67.181/20 ip protocol 6 sport 3306 dport 25 accept
+        ip saddr 172.18.209.245/28 ip daddr 10.124.147.250/24 ip protocol 6 sport 80-130 dport 8000-22520 accept
+        ip saddr 192.168.58.97/32 ip daddr 10.178.225.80/24 ip protocol 6 sport 1024-16508 dport 8080 accept
+        ip saddr 192.168.38.148/24 ip daddr 192.168.252.252/32 ip protocol 17 sport 9000-9057 dport 9000-9082 accept
+        ip saddr 192.168.161.220/24 ip daddr 10.240.22.108/24 ip protocol 6 sport 8080 dport 8000-8064 accept
+        ip saddr 10.29.32.177/24 ip daddr 172.18.116.148/28 ip protocol 17 sport 0-50394 dport 9000-9094 accept
+        ip saddr 192.168.96.96/32 ip daddr 172.20.211.218/12 ip protocol 6 sport 8000-8091 dport 465 accept
+        ip saddr 172.30.15.190/28 ip daddr 192.168.81.71/32 ip protocol 17 sport 10000-36789 dport 30000-33431 accept
+        ip saddr 10.168.205.58/16 ip daddr 192.168.197.235/24 ip protocol 17 sport 30000-39854 dport 25 drop
+        ip saddr 172.28.138.235/20 ip daddr 192.168.43.96/32 ip protocol 17 sport 993 dport 80 drop
+        ip saddr 192.168.47.217/32 ip daddr 172.27.148.24/20 ip protocol 6 sport 443 dport 993 accept
+        ip saddr 10.79.84.249/16 ip daddr 10.19.83.163/24 ip protocol 6 sport 30000-38588 dport 443-463 accept
+        ip saddr 192.168.84.193/32 ip daddr 10.210.92.15/24 ip protocol 17 sport 10000-50015 dport 143 accept
+        ip saddr 10.158.114.147/8 ip daddr 172.22.53.97/28 ip protocol 6 sport 10000-40256 dport 10000-42958 drop
+        ip saddr 10.70.220.44/32 ip daddr 10.246.15.250/32 ip protocol 6 sport 80-171 dport 0-37363 accept
+        ip saddr 172.20.183.20/32 ip daddr 10.113.174.247/32 ip protocol 6 sport 0-54381 dport 27017 accept
+        ip saddr 10.191.244.141/16 ip daddr 172.19.43.176/32 ip protocol 17 sport 443-460 dport 995 accept
+        ip saddr 10.240.47.51/24 ip daddr 10.40.144.71/16 ip protocol 6 sport 80 dport 9000-9067 drop
+        ip saddr 10.154.48.125/16 ip daddr 10.214.243.95/24 ip protocol 6 sport 80-94 dport 10000-49107 accept
+        ip saddr 192.168.123.223/32 ip daddr 172.29.188.83/20 ip protocol 1 accept
+        ip saddr 192.168.10.105/32 ip daddr 172.17.100.162/28 ip protocol 6 sport 8000-56976 dport 993 accept
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-1023 accept
+        ip saddr 192.168.53.19/32 ip daddr 192.168.170.63/24 ip protocol 17 sport 3306 dport 1024-55444 accept
+        ip saddr 192.168.245.2/32 ip daddr 10.32.78.182/32 ip protocol 6 sport 0-38462 dport 993 accept
+        ip saddr 172.28.190.64/12 ip daddr 192.168.242.97/24 ip protocol 6 sport 1024-19774 dport 993 accept
+        ip saddr 172.19.251.179/32 ip daddr 172.28.204.250/32 ip protocol 6 sport 10000-32219 dport 10000-55355 drop
+        ip saddr 192.168.136.143/32 ip daddr 192.168.217.88/24 ip protocol 6 sport 443-512 dport 53 accept
+        ip saddr 172.30.68.241/28 ip daddr 172.21.85.39/28 ip protocol 1 accept
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 dport 1-1023 drop
+        ip saddr 10.38.107.203/24 ip daddr 172.27.160.62/28 ip protocol 17 sport 1024-63466 dport 110 drop
+        ip saddr 10.64.161.56/16 ip daddr 192.168.187.143/32 ip protocol 6 sport 0-20111 dport 8000-8047 accept
+        ip saddr 10.187.224.221/24 ip daddr 192.168.142.176/24 ip protocol 6 sport 143 dport 27017 accept
+        ip saddr 172.24.84.75/32 ip daddr 10.146.55.33/24 ip protocol 6 sport 1024-9061 dport 53 drop
+        ip saddr 172.18.207.46/32 ip daddr 172.27.30.27/32 ip protocol 6 sport 8000-8038 dport 1024-53039 accept
+        ip saddr 10.71.26.222/16 ip daddr 172.16.215.81/28 ip protocol 6 sport 8080-8150 dport 995 accept
+        ip saddr 192.168.245.19/32 ip daddr 172.18.92.42/20 ip protocol 6 sport 53 dport 9000-9044 drop
+        ip saddr 192.168.93.42/32 ip daddr 10.221.128.36/24 ip protocol 6 sport 0-20056 dport 80 drop
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 17 dport 1-1023 drop
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 dport 1024-65535 drop
+        ip saddr 172.25.22.236/32 ip daddr 172.22.72.26/28 ip protocol 6 sport 443-523 dport 27017 accept
+        ip saddr 192.168.78.242/24 ip daddr 192.168.172.220/32 ip protocol 17 sport 80-90 dport 465 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1-1023 accept
+        ip saddr 10.213.74.220/24 ip daddr 10.254.254.216/32 ip protocol 17 sport 8000-8061 dport 993 accept
+        ip saddr 10.30.172.235/16 ip daddr 172.31.126.252/28 ip protocol 6 sport 80 dport 143 drop
+        ip saddr 172.28.194.73/20 ip daddr 172.19.101.219/28 ip protocol 6 sport 8000-8057 dport 53 drop
+        ip saddr 192.168.214.21/24 ip daddr 10.167.165.170/8 ip protocol 6 sport 1024-51035 dport 27017 drop
+        ip saddr 172.16.189.220/20 ip daddr 172.30.161.162/12 ip protocol 6 sport 3306 dport 8080 drop
+        ip saddr 192.168.240.240/24 ip daddr 10.55.9.219/24 ip protocol 6 sport 8000-58060 dport 80-131 accept
+        ip saddr 172.25.60.57/20 ip daddr 192.168.230.148/32 ip protocol 1 accept
+        ip saddr 172.27.179.12/32 ip daddr 10.205.130.155/24 ip protocol 6 sport 80 dport 10000-44034 accept
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 17 sport 1024-65535 dport 1024-65535 accept
+        ip saddr 192.168.71.145/32 ip daddr 192.168.163.22/24 ip protocol 6 sport 8000-46910 dport 110 accept
+        ip saddr 192.168.153.126/32 ip daddr 10.188.153.101/24 ip protocol 6 sport 5432 dport 80-156 drop
+        ip saddr 192.168.116.128/32 ip daddr 192.168.245.253/24 ip protocol 17 sport 9000-9099 dport 1024-54872 accept
+        ip saddr 192.168.56.68/24 ip daddr 172.26.9.196/28 ip protocol 17 sport 443-495 dport 9000-9060 drop
+        ip saddr 10.70.178.191/24 ip daddr 192.168.166.108/16 ip protocol 6 sport 8080-8120 dport 10000-44939 accept
+        ip saddr 192.168.135.90/32 ip daddr 10.126.55.193/16 ip protocol 17 sport 8080 dport 1024-46259 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 6 dport 1-49151 drop
+        ip saddr 172.24.192.42/20 ip daddr 192.168.194.103/32 ip protocol 6 sport 3306 dport 1024-20059 drop
+        ip saddr 10.177.86.142/8 ip daddr 192.168.131.76/32 ip protocol 6 sport 110 dport 9000-9089 accept
+        ip saddr 192.168.122.131/24 ip daddr 192.168.115.139/32 ip protocol 6 sport 5432 dport 6379 drop
+        ip saddr 10.80.221.167/24 ip daddr 172.31.71.66/28 ip protocol 1 accept
+        ip saddr 192.168.118.229/32 ip daddr 192.168.19.24/16 ip protocol 17 sport 995 dport 0-52034 accept
+        ip saddr 192.168.148.53/32 ip daddr 10.152.198.221/24 ip protocol 6 sport 3306 dport 465 accept
+        ip saddr 10.239.160.107/16 ip daddr 10.169.79.109/16 ip protocol 6 sport 8000-8091 dport 143 accept
+        ip saddr 192.168.98.230/24 ip daddr 192.168.207.156/32 ip protocol 6 sport 80-131 dport 443-460 drop
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 1 drop
+        ip saddr 10.133.133.165/24 ip daddr 172.24.139.55/12 ip protocol 6 sport 143 dport 8000-8083 accept
+        ip saddr 192.168.60.135/32 ip daddr 10.207.146.196/24 ip protocol 1 accept
+        ip saddr 10.112.49.159/8 ip daddr 172.20.230.229/28 ip protocol 6 sport 8000-35252 dport 10000-59633 accept
+        ip saddr 10.126.179.201/24 ip daddr 192.168.41.234/32 ip protocol 17 sport 8000-8009 dport 0-8094 drop
+        ip saddr 10.76.185.115/16 ip daddr 192.168.226.56/24 ip protocol 17 sport 25 dport 9000-9057 accept
+        ip saddr 192.168.212.178/32 ip daddr 10.236.188.217/24 ip protocol 6 sport 22 dport 110 accept
+        ip saddr 10.23.48.57/24 ip daddr 192.168.32.165/32 ip protocol 6 sport 995 dport 995 accept
+        ip saddr 10.69.86.238/32 ip daddr 192.168.215.57/32 ip protocol 1 drop
+        ip saddr 10.178.14.229/16 ip daddr 192.168.201.62/32 ip protocol 1 accept
+        ip saddr 192.168.217.39/32 ip daddr 10.126.185.229/24 ip protocol 17 sport 443 dport 0-4222 accept
+        ip saddr 10.123.56.156/16 ip daddr 10.17.48.232/24 ip protocol 6 sport 80-111 dport 10000-38767 accept
+        ip saddr 10.71.191.217/24 ip daddr 172.23.126.64/32 ip protocol 6 sport 8000-45845 dport 8000-8030 accept
+        ip saddr 192.168.113.44/32 ip daddr 172.17.243.93/28 ip protocol 6 sport 443-523 dport 9000-9063 accept
+        ip saddr 192.168.195.38/32 ip daddr 172.29.82.136/28 ip protocol 17 sport 80 dport 10000-25792 accept
+        ip saddr 192.168.73.232/32 ip daddr 10.211.74.118/8 ip protocol 6 sport 443-492 dport 443 accept
+        ip saddr 172.27.223.221/20 ip daddr 192.168.97.134/24 ip protocol 17 sport 25 dport 80-104 accept
+        ip saddr 192.168.111.28/32 ip daddr 172.25.179.183/12 ip protocol 6 sport 995 dport 143 drop
+        ip saddr 172.23.195.82/28 ip daddr 192.168.104.181/32 ip protocol 6 sport 3306 dport 10000-40556 accept
+        ip saddr 172.27.130.53/28 ip daddr 172.30.233.129/20 ip protocol 6 sport 10000-59914 dport 1024-25318 accept
+        ip saddr 10.74.182.97/16 ip daddr 192.168.213.204/24 ip protocol 6 sport 443 dport 110 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 1 accept
+        ip saddr 192.168.172.213/24 ip daddr 172.31.178.245/28 ip protocol 6 sport 8000-19092 dport 27017 drop
+        ip saddr 192.168.30.18/32 ip daddr 10.24.214.224/32 ip protocol 6 sport 443-451 dport 0-28668 accept
+        ip saddr 192.168.247.102/32 ip daddr 10.3.98.177/24 ip protocol 6 sport 80-147 dport 30000-48788 drop
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 17 sport 1-1023 dport 1024-65535 drop
+        ip saddr 192.168.220.116/32 ip daddr 10.54.202.219/8 ip protocol 6 sport 443-467 dport 8000-8045 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 drop
+        ip saddr 172.28.254.45/28 ip daddr 10.115.163.143/16 ip protocol 6 sport 0-4152 dport 5432 accept
+        ip saddr 192.168.4.214/32 ip daddr 10.255.237.112/32 ip protocol 6 sport 8000-8072 dport 0-5577 drop
+        ip saddr 192.168.243.116/24 ip daddr 10.143.141.13/32 ip protocol 1 accept
+        ip saddr 192.168.203.237/16 ip daddr 172.21.50.202/28 ip protocol 17 sport 8080-8166 dport 8000-33155 accept
+        ip saddr 192.168.40.39/32 ip daddr 172.17.183.225/20 ip protocol 17 sport 53 dport 993 accept
+        ip saddr 172.16.242.177/28 ip daddr 172.31.179.6/20 ip protocol 17 sport 8080-8135 dport 25 accept
+        ip saddr 192.168.151.59/32 ip daddr 192.168.37.162/24 ip protocol 6 sport 143 dport 1024-49498 accept
+        ip saddr 10.2.168.242/8 ip daddr 172.27.132.113/32 ip protocol 6 sport 53 dport 6379 accept
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 6 sport 1024-65535 drop
+        ip saddr 10.13.114.51/16 ip daddr 192.168.47.166/32 ip protocol 17 sport 10000-10808 dport 5432 drop
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 6 dport 1024-65535 drop
+        ip saddr 192.168.124.72/32 ip daddr 10.194.239.78/16 ip protocol 6 sport 8080 dport 80-101 accept
+        ip saddr 172.18.118.35/28 ip daddr 10.253.217.209/24 ip protocol 1 accept
+        ip saddr 192.168.194.128/32 ip daddr 172.30.22.78/28 ip protocol 1 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 17 dport 1-1023 drop
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 17 sport 1-49151 dport 1024-65535 drop
+        ip saddr 172.21.175.52/12 ip daddr 172.25.83.139/32 ip protocol 6 sport 9000-9100 dport 5432 drop
+        ip saddr 172.19.164.248/12 ip daddr 10.92.31.107/24 ip protocol 6 sport 8080-8170 dport 993 accept
+        ip saddr 172.31.250.74/20 ip daddr 172.23.190.163/20 ip protocol 1 accept
+        ip saddr 172.29.98.184/28 ip daddr 172.18.184.44/20 ip protocol 17 sport 465 dport 465 accept
+        ip saddr 192.168.204.154/16 ip daddr 172.29.198.74/20 ip protocol 6 sport 443 dport 9000-9071 accept
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 172.27.248.201/28 ip daddr 192.168.77.46/32 ip protocol 1 accept
+        ip saddr 192.168.72.137/32 ip daddr 172.30.146.21/32 ip protocol 17 sport 8000-8060 dport 143 accept
+        ip saddr 172.17.110.11/32 ip daddr 10.11.144.70/32 ip protocol 6 sport 443-537 dport 80 accept
+        ip saddr 172.30.201.37/20 ip daddr 172.21.231.7/20 ip protocol 6 sport 8080-8083 dport 1024-30487 accept
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-1023 drop
+        ip saddr 192.168.109.249/24 ip daddr 192.168.32.8/32 ip protocol 6 sport 30000-42252 dport 443 accept
+        ip saddr 172.26.7.104/28 ip daddr 192.168.200.251/32 ip protocol 17 sport 110 dport 443-529 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 1 drop
+        ip saddr 192.168.43.100/32 ip daddr 172.19.197.133/20 ip protocol 6 sport 3306 dport 9000-9049 accept
+        ip saddr 172.29.137.136/20 ip daddr 192.168.88.178/32 ip protocol 17 sport 443-466 dport 6379 drop
+        ip saddr 10.248.30.169/16 ip daddr 172.31.214.203/28 ip protocol 6 sport 8080-8142 dport 25 drop
+        ip saddr 172.17.11.214/20 ip daddr 192.168.147.204/24 ip protocol 6 sport 8080-8150 dport 9000-9014 accept
+        ip saddr 172.17.84.223/32 ip daddr 172.22.254.75/12 ip protocol 17 sport 110 dport 443-481 accept
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 17 sport 1-1023 dport 1024-65535 accept
+        ip saddr 172.27.39.138/32 ip daddr 10.224.205.197/32 ip protocol 17 sport 993 dport 993 accept
+        ip saddr 192.168.219.56/24 ip daddr 10.105.202.13/32 ip protocol 6 sport 30000-52991 dport 9000-9068 drop
+        ip saddr 172.25.66.55/28 ip daddr 192.168.48.193/24 ip protocol 17 sport 10000-13885 dport 1024-46992 accept
+        ip saddr 192.168.164.233/32 ip daddr 192.168.201.16/32 ip protocol 17 sport 8000-8080 dport 8080-8089 drop
+        ip saddr 10.206.66.116/24 ip daddr 172.27.207.110/28 ip protocol 17 sport 9000 dport 0-60089 accept
+        ip saddr 10.203.161.106/16 ip daddr 172.22.199.124/28 ip protocol 6 sport 8080 dport 25 drop
+        ip saddr 172.17.140.145/20 ip daddr 192.168.235.78/24 ip protocol 1 drop
+        ip saddr 192.168.154.142/24 ip daddr 172.18.252.164/28 ip protocol 6 sport 3306 dport 443-449 accept
+        ip saddr 192.168.119.225/32 ip daddr 10.48.187.234/16 ip protocol 6 sport 443-518 dport 465 accept
+        ip saddr 172.19.219.231/12 ip daddr 172.20.58.199/28 ip protocol 6 sport 53 dport 0-13526 drop
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-1023 drop
+        ip saddr 10.195.244.3/32 ip daddr 10.73.36.9/16 ip protocol 17 sport 9000-9083 dport 3306 accept
+        ip saddr 10.210.203.163/24 ip daddr 172.22.243.171/20 ip protocol 6 sport 993 dport 143 drop
+        ip saddr 172.20.121.125/20 ip daddr 192.168.43.34/24 ip protocol 6 sport 9000-9036 dport 0-39537 accept
+        ip saddr 10.200.147.150/16 ip daddr 10.122.138.233/24 ip protocol 17 sport 6379 dport 80-147 accept
+        ip saddr 172.26.32.139/20 ip daddr 192.168.215.123/32 ip protocol 6 sport 8080-8178 dport 25 accept
+        ip saddr 10.30.245.198/8 ip daddr 172.25.42.232/28 ip protocol 6 sport 8080-8134 dport 0-20012 accept
+        ip saddr 192.168.104.9/16 ip daddr 10.167.75.208/24 ip protocol 6 sport 80-119 dport 443-450 drop
+        ip saddr 10.232.32.90/24 ip daddr 10.158.91.68/24 ip protocol 17 sport 443-458 dport 80 accept
+        ip saddr 172.24.75.192/20 ip daddr 10.137.155.127/32 ip protocol 6 sport 995 dport 993 accept
+        ip saddr 172.18.119.91/28 ip daddr 192.168.184.98/24 ip protocol 6 sport 1024-25120 dport 993 accept
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-1023 drop
+        ip saddr 192.168.59.13/24 ip daddr 192.168.1.80/24 ip protocol 6 sport 1024-4037 dport 8080-8099 drop
+        ip saddr 10.214.183.146/16 ip daddr 10.213.31.149/8 ip protocol 6 sport 110 dport 3306 accept
+        ip saddr 10.91.211.5/16 ip daddr 192.168.23.131/16 ip protocol 6 sport 6379 dport 8000-29449 accept
+        ip saddr 172.22.107.229/20 ip daddr 172.23.195.63/28 ip protocol 6 sport 8080-8178 dport 30000-46064 drop
+        ip saddr 10.119.75.122/24 ip daddr 192.168.4.233/16 ip protocol 17 sport 465 dport 143 accept
+        ip saddr 192.168.121.241/32 ip daddr 10.72.229.45/32 ip protocol 6 sport 995 dport 110 drop
+        ip saddr 172.30.171.176/12 ip daddr 10.48.239.120/24 ip protocol 17 sport 8080-8089 dport 80-135 accept
+        ip saddr 172.24.90.9/32 ip daddr 172.26.112.167/28 ip protocol 17 sport 53 dport 1024-52137 accept
+        ip saddr 10.84.40.245/24 ip daddr 172.29.2.38/20 ip protocol 6 sport 993 dport 8080 drop
+        ip saddr 10.80.178.246/32 ip daddr 172.17.74.97/20 ip protocol 6 sport 1024-7001 dport 8000-33968 accept
+        ip saddr 172.21.144.83/20 ip daddr 172.30.120.110/28 ip protocol 6 sport 80-139 dport 993 accept
+        ip saddr 10.66.237.27/16 ip daddr 172.27.233.99/28 ip protocol 1 accept
+        ip saddr 192.168.227.9/32 ip daddr 10.169.192.232/16 ip protocol 17 sport 0-22018 dport 10000-63849 accept
+        ip saddr 172.29.167.59/20 ip daddr 10.95.210.69/16 ip protocol 17 sport 443-447 dport 9000-9031 accept
+        ip saddr 192.168.245.67/24 ip daddr 172.28.65.169/20 ip protocol 1 accept
+        ip saddr 10.195.214.201/32 ip daddr 172.31.89.147/28 ip protocol 6 sport 9000-9064 dport 8080 accept
+        ip saddr 10.15.0.220/32 ip daddr 172.17.223.250/32 ip protocol 6 sport 8000-8098 dport 443-463 accept
+        ip saddr 172.17.202.0/32 ip daddr 10.198.223.81/24 ip protocol 17 sport 1024-12564 dport 3306 accept
+        ip saddr 192.168.14.113/32 ip daddr 172.20.140.26/28 ip protocol 6 sport 993 dport 10000-45528 accept
+        ip saddr 10.28.194.12/16 ip daddr 10.10.52.0/24 ip protocol 17 sport 995 dport 443-486 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 1 accept
+        ip saddr 172.17.231.225/20 ip daddr 192.168.72.134/32 ip protocol 6 sport 8000-12753 dport 465 accept
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 ip protocol 1 drop
+        ip saddr 172.26.82.195/20 ip daddr 10.223.173.54/32 ip protocol 6 sport 8000-19416 dport 30000-53384 accept
+        ip saddr 10.193.187.143/24 ip daddr 192.168.150.202/24 ip protocol 6 sport 30000-55663 dport 30000-32122 accept
+        ip saddr 192.168.113.25/32 ip daddr 10.254.11.247/16 ip protocol 17 sport 1024-23752 dport 1024-42717 accept
+        ip saddr 192.168.171.231/32 ip daddr 172.22.181.187/20 ip protocol 6 sport 8080 dport 0-6310 drop
+        ip saddr 10.211.250.81/24 ip daddr 172.27.61.73/28 ip protocol 6 sport 6379 dport 30000-44783 accept
+        ip saddr 10.150.254.67/16 ip daddr 172.19.89.232/20 ip protocol 6 sport 5432 dport 53 drop
+        ip saddr 10.173.7.219/24 ip daddr 192.168.247.41/32 ip protocol 6 sport 443-520 dport 1024-4533 accept
+        ip saddr 10.209.141.33/24 ip daddr 192.168.135.208/32 ip protocol 6 sport 53 dport 25 accept
+        ip saddr 10.184.190.145/16 ip daddr 10.150.207.47/32 ip protocol 6 sport 8080-8105 dport 443 accept
+        ip saddr 10.242.119.218/32 ip daddr 172.28.184.13/28 ip protocol 6 sport 8000-13972 dport 8080-8103 accept
+        ip saddr 10.228.60.168/16 ip daddr 172.30.225.193/20 ip protocol 17 sport 30000-34039 dport 143 accept
+        ip saddr 172.29.63.96/12 ip daddr 192.168.116.124/32 ip protocol 17 sport 30000-57435 dport 10000-47533 accept
+        ip saddr 10.202.35.204/8 ip daddr 192.168.17.199/32 ip protocol 6 sport 30000-39663 dport 993 drop
+        ip saddr 10.108.124.221/32 ip daddr 10.21.217.157/24 ip protocol 6 sport 10000-23232 dport 1024-55688 accept
+        ip saddr 192.168.34.79/24 ip daddr 192.168.203.114/32 ip protocol 6 sport 30000-60025 dport 0-54997 accept
+        ip saddr 192.168.51.77/16 ip daddr 192.168.51.181/32 ip protocol 6 sport 8000-65533 dport 8080-8163 accept
+        ip saddr 10.88.42.144/16 ip daddr 10.205.174.59/16 ip protocol 6 sport 8000-53253 dport 143 accept
+        ip saddr 172.16.165.191/28 ip daddr 172.25.243.75/20 ip protocol 6 sport 80-109 dport 143 drop
+        ip saddr 172.29.86.51/28 ip daddr 10.96.57.27/24 ip protocol 17 sport 10000-58558 dport 9000-9047 accept
+        ip saddr 10.33.152.140/24 ip daddr 192.168.206.136/24 ip protocol 17 sport 30000-31897 dport 995 drop
+        ip saddr 10.16.238.176/24 ip daddr 172.22.95.27/20 ip protocol 6 sport 30000-56014 dport 80-167 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 6 sport 1024-65535 dport 1-49151 drop
+        ip saddr 192.168.228.103/24 ip daddr 172.27.49.59/28 ip protocol 6 sport 8000-57083 dport 0-37364 accept
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 192.168.109.187/32 ip daddr 192.168.115.65/32 ip protocol 1 accept
+        ip saddr 192.168.4.85/24 ip daddr 192.168.156.101/32 ip protocol 6 sport 8000-35774 dport 8000-38080 accept
+        ip saddr 192.168.203.87/32 ip daddr 10.191.155.11/24 ip protocol 6 sport 8000-8038 dport 8080-8088 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-49151 dport 1-1023 drop
+        ip saddr 172.24.220.61/20 ip daddr 192.168.152.251/24 ip protocol 17 sport 443-450 dport 30000-56482 accept
+        ip saddr 192.168.13.8/32 ip daddr 172.24.77.56/12 ip protocol 6 sport 80-154 dport 30000-42446 drop
+        ip saddr 192.168.243.147/16 ip daddr 192.168.183.140/32 ip protocol 6 sport 30000-41870 dport 6379 accept
+        ip saddr 192.168.93.187/16 ip daddr 172.18.219.139/20 ip protocol 17 sport 110 dport 993 accept
+        ip saddr 192.168.150.141/32 ip daddr 10.240.234.43/16 ip protocol 6 sport 9000-9079 dport 995 accept
+        ip saddr 192.168.195.106/32 ip daddr 172.17.186.224/32 ip protocol 17 sport 443 dport 25 drop
+        ip saddr 10.161.253.3/32 ip daddr 10.41.96.30/24 ip protocol 6 sport 443-483 dport 80-137 drop
+        ip saddr 10.81.30.104/24 ip daddr 10.66.65.127/24 ip protocol 6 sport 8080-8134 dport 10000-10305 accept
+        ip saddr 172.16.115.81/32 ip daddr 192.168.97.147/24 ip protocol 17 sport 143 dport 143 accept
+        ip saddr 10.196.96.186/24 ip daddr 172.21.88.58/20 ip protocol 6 sport 8080 dport 9000-9076 accept
+        ip saddr 192.168.68.128/32 ip daddr 172.27.126.251/32 ip protocol 6 sport 995 dport 10000-11253 drop
+        ip saddr 10.108.33.32/32 ip daddr 192.168.86.133/24 ip protocol 6 sport 0-49177 dport 8000-58544 accept
+        ip saddr 10.55.90.165/24 ip daddr 10.24.178.67/24 ip protocol 6 sport 8080-8095 dport 8080-8169 accept
+        ip saddr 192.168.4.195/32 ip daddr 192.168.51.179/32 ip protocol 17 sport 25 dport 10000-64437 accept
+        ip saddr 192.168.60.71/24 ip daddr 10.254.215.167/16 ip protocol 17 sport 8080 dport 1024-24480 accept
+        ip saddr 10.254.34.52/8 ip daddr 192.168.246.25/32 ip protocol 17 sport 465 dport 53 accept
+        ip saddr 10.46.31.80/32 ip daddr 10.51.220.88/8 ip protocol 6 sport 8080-8117 dport 22 accept
+        ip saddr 10.148.197.56/24 ip daddr 192.168.160.27/32 ip protocol 17 sport 110 dport 0-1267 accept
+        ip saddr 10.168.70.59/24 ip daddr 172.24.149.253/32 ip protocol 6 sport 110 dport 53 drop
+        ip saddr 172.28.87.200/28 ip daddr 172.29.126.228/28 ip protocol 6 sport 0-17368 dport 80-100 drop
+        ip saddr 172.30.5.110/20 ip daddr 172.27.121.164/28 ip protocol 6 sport 1024-32683 dport 0-53907 accept
+        ip saddr 192.168.160.227/24 ip daddr 192.168.114.174/16 ip protocol 6 sport 8000-8066 dport 9000-9012 drop
+        ip saddr 172.27.16.97/28 ip daddr 192.168.197.14/24 ip protocol 6 sport 30000-33576 dport 995 drop
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-49151 dport 1-49151 drop
+        ip saddr 172.21.74.253/20 ip daddr 172.26.66.161/20 ip protocol 17 sport 0-29190 dport 8080-8131 accept
+        ip saddr 172.30.86.210/20 ip daddr 172.30.78.97/28 ip protocol 6 sport 0-13453 dport 80-151 drop
+        ip saddr 192.168.155.244/32 ip daddr 192.168.105.232/32 ip protocol 6 sport 8000-8046 dport 1024-56357 accept
+        ip saddr 192.168.242.62/32 ip daddr 172.30.123.37/20 ip protocol 17 sport 1024-1167 dport 110 drop
+        ip saddr 192.168.191.110/32 ip daddr 10.84.12.44/24 ip protocol 6 sport 10000-17009 dport 443 drop
+        ip saddr 172.22.230.27/28 ip daddr 10.173.5.160/16 ip protocol 17 sport 9000-9015 dport 10000-39975 drop
+        ip saddr 10.255.102.119/16 ip daddr 192.168.24.222/32 ip protocol 6 sport 9000-9061 dport 1024-46362 drop
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1024-65535 dport 1-1023 drop
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-49151 dport 1024-65535 drop
+        ip saddr 10.53.5.6/24 ip daddr 192.168.164.200/32 ip protocol 6 sport 25 dport 1024-18954 accept
+        ip saddr 172.30.125.182/32 ip daddr 10.211.83.95/24 ip protocol 17 sport 30000-49589 dport 30000-50572 drop
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1024-65535 drop
+        ip saddr 192.168.111.71/24 ip daddr 192.168.148.198/32 ip protocol 6 sport 1024-65336 dport 1024-34047 accept
+        ip saddr 192.168.59.22/32 ip daddr 192.168.245.243/32 ip protocol 17 sport 10000-54187 dport 30000-48738 accept
+        ip saddr 10.54.131.76/16 ip daddr 10.27.43.85/24 ip protocol 6 sport 993 dport 8000-52786 drop
+        ip saddr 192.168.151.28/24 ip daddr 192.168.16.138/32 ip protocol 17 sport 9000-9086 dport 1024-49678 accept
+        ip saddr 192.168.147.69/32 ip daddr 10.195.94.204/24 ip protocol 6 sport 8000-44184 dport 143 accept
+        ip saddr 172.23.55.177/12 ip daddr 192.168.188.72/32 ip protocol 6 sport 9000-9025 dport 1024-20303 drop
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 17 sport 1-1023 dport 1-49151 accept
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 17 dport 1-1023 drop
+        ip saddr 10.95.187.100/8 ip daddr 192.168.61.27/32 ip protocol 17 sport 9000-9033 dport 25 accept
+        ip saddr 172.20.244.43/20 ip daddr 172.17.160.155/32 ip protocol 6 sport 8000-8062 dport 30000-53467 drop
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 drop
+        ip saddr 192.168.112.158/16 ip daddr 192.168.34.232/32 ip protocol 6 sport 27017 dport 80-124 accept
+        ip saddr 172.26.152.24/28 ip daddr 10.243.32.123/8 ip protocol 1 accept
+        ip saddr 192.168.124.214/16 ip daddr 192.168.164.81/32 ip protocol 6 sport 0-50577 dport 143 drop
+        ip saddr 172.30.66.0/28 ip daddr 172.22.41.15/28 ip protocol 6 sport 53 dport 993 accept
+        ip saddr 10.107.235.140/24 ip daddr 10.217.49.251/32 ip protocol 17 sport 110 dport 10000-52373 accept
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1-49151 drop
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 17 sport 1-1023 accept
+        ip saddr 192.168.78.184/24 ip daddr 192.168.169.214/24 ip protocol 6 sport 80 dport 30000-34616 accept
+        ip saddr 172.29.11.83/28 ip daddr 192.168.207.19/32 ip protocol 17 sport 465 dport 22 accept
+        ip saddr 192.168.23.77/32 ip daddr 10.183.36.120/8 ip protocol 6 sport 993 dport 9000-9011 drop
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 dport 1-1023 accept
+        ip saddr 172.28.164.196/32 ip daddr 10.242.174.131/16 ip protocol 17 sport 143 dport 993 accept
+        ip saddr 192.168.73.196/24 ip daddr 192.168.191.10/16 ip protocol 6 sport 110 dport 80-85 accept
+        ip saddr 192.168.43.149/32 ip daddr 192.168.176.13/24 ip protocol 17 sport 30000-39335 dport 443 accept
+        ip saddr 10.92.218.244/24 ip daddr 192.168.27.216/32 ip protocol 17 sport 30000-60229 dport 80-117 accept
+        ip saddr 10.0.0.0/8 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-49151 drop
+        ip saddr 10.249.113.5/8 ip daddr 172.20.26.86/28 ip protocol 6 sport 8080 dport 443-483 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 6 sport 1024-65535 dport 1-1023 drop
+        ip saddr 192.168.156.129/32 ip daddr 10.186.158.226/32 ip protocol 6 sport 1024-1340 dport 993 drop
+        ip saddr 172.24.218.143/32 ip daddr 10.169.194.158/32 ip protocol 6 sport 8000-8099 dport 27017 accept
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1024-65535 accept
+        ip saddr 10.143.172.228/32 ip daddr 10.100.146.185/16 ip protocol 17 sport 0-9882 dport 30000-32044 accept
+        ip saddr 192.168.108.238/16 ip daddr 192.168.133.111/32 ip protocol 6 sport 10000-52854 dport 8000-33722 drop
+        ip saddr 192.168.148.253/24 ip daddr 192.168.46.93/32 ip protocol 6 sport 443-521 dport 9000-9017 accept
+        ip saddr 192.168.74.218/32 ip daddr 172.27.123.64/20 ip protocol 6 sport 1024-5143 dport 443 accept
+        ip saddr 172.28.107.66/28 ip daddr 172.17.124.106/20 ip protocol 17 sport 80-170 dport 8000-62714 accept
+        ip saddr 192.168.89.2/32 ip daddr 172.27.176.130/28 ip protocol 6 sport 0-32975 dport 995 accept
+        ip saddr 172.31.148.94/32 ip daddr 192.168.3.96/32 ip protocol 17 sport 80 dport 27017 accept
+        ip saddr 10.80.145.36/24 ip daddr 192.168.60.149/32 ip protocol 6 sport 8000-8092 dport 465 accept
+        ip saddr 10.210.97.97/16 ip daddr 10.65.122.40/24 ip protocol 6 sport 465 dport 9000-9018 accept
+        ip saddr 10.207.151.248/24 ip daddr 192.168.9.136/32 ip protocol 1 drop
+        ip saddr 10.112.80.116/32 ip daddr 192.168.73.17/32 ip protocol 17 sport 1024-41866 dport 8000-8021 accept
+        ip saddr 172.18.51.246/20 ip daddr 172.20.59.23/20 ip protocol 6 sport 110 dport 10000-64166 accept
+        ip saddr 172.17.63.201/32 ip daddr 192.168.60.43/24 ip protocol 6 sport 9000-9069 dport 10000-44212 drop
+        ip saddr 192.168.219.160/24 ip daddr 172.28.51.22/28 ip protocol 17 sport 30000-36403 dport 8000-8061 drop
+        ip saddr 10.145.8.84/24 ip daddr 192.168.209.58/24 ip protocol 6 sport 143 dport 30000-64245 accept
+        ip saddr 192.168.105.44/32 ip daddr 172.29.21.66/28 ip protocol 6 sport 465 dport 8000-8068 accept
+        ip saddr 172.28.183.241/32 ip daddr 172.31.112.96/20 ip protocol 17 sport 8080-8112 dport 30000-52567 accept
+        ip saddr 10.60.248.207/32 ip daddr 172.21.45.108/20 ip protocol 6 sport 8000-8070 dport 80-100 accept
+        ip saddr 10.74.104.125/24 ip daddr 192.168.222.233/24 ip protocol 17 sport 3306 dport 22 drop
+        ip saddr 172.25.42.193/32 ip daddr 192.168.29.107/16 ip protocol 17 sport 10000-38768 dport 110 drop
+        ip saddr 172.22.59.93/20 ip daddr 192.168.118.157/32 ip protocol 1 drop
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-49151 accept
+        ip saddr 172.28.165.3/28 ip daddr 10.7.222.30/32 ip protocol 6 sport 53 dport 9000-9074 drop
+        ip saddr 172.23.61.208/28 ip daddr 10.232.214.44/8 ip protocol 6 sport 8000-8022 dport 80-151 accept
+        ip saddr 10.131.240.99/32 ip daddr 192.168.128.18/32 ip protocol 6 sport 30000-61695 dport 8000-58829 accept
+        ip saddr 192.168.14.0/32 ip daddr 172.18.41.103/28 ip protocol 1 accept
+        ip saddr 192.168.0.0/16 ip daddr 172.16.0.0/12 ip protocol 6 dport 1-49151 accept
+        ip saddr 10.134.213.197/16 ip daddr 10.204.64.162/24 ip protocol 17 sport 0-23394 dport 8000-8027 accept
+        ip saddr 192.168.97.93/32 ip daddr 10.120.63.191/32 ip protocol 17 sport 1024-16045 dport 443 accept
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 17 sport 1-1023 dport 1-1023 drop
+        ip saddr 10.61.96.182/8 ip daddr 192.168.252.62/32 ip protocol 6 sport 30000-32769 dport 8000-48676 drop
+        ip saddr 192.168.140.169/32 ip daddr 192.168.143.127/32 ip protocol 1 accept
+        ip saddr 172.28.153.84/32 ip daddr 10.234.21.153/8 ip protocol 6 sport 8080-8120 dport 80-166 accept
+        ip saddr 172.27.146.63/28 ip daddr 172.21.253.39/28 ip protocol 6 sport 6379 dport 8000-31981 accept
+        ip saddr 172.27.233.245/28 ip daddr 172.24.242.185/28 ip protocol 17 sport 9000-9087 dport 53 drop
+        ip saddr 10.0.0.0/8 ip daddr 172.16.0.0/12 ip protocol 6 sport 1-1023 dport 1-1023 drop
+        ip saddr 192.168.221.75/32 ip daddr 10.74.172.7/32 ip protocol 6 sport 10000-62800 dport 5432 drop
+        ip saddr 192.168.161.167/32 ip daddr 172.24.7.250/28 ip protocol 17 sport 8080-8092 dport 80-107 accept
+        ip saddr 192.168.49.78/32 ip daddr 172.24.80.7/28 ip protocol 6 sport 8000-8044 dport 53 accept
+        ip saddr 192.168.101.221/32 ip daddr 192.168.89.93/16 ip protocol 17 sport 3306 dport 8080-8179 drop
+        ip saddr 172.25.43.51/28 ip daddr 10.85.204.117/24 ip protocol 6 sport 10000-51371 dport 8080-8089 accept
+        ip saddr 172.26.35.221/28 ip daddr 192.168.136.242/32 ip protocol 6 sport 995 dport 8000-8095 drop
+        ip saddr 172.21.90.171/20 ip daddr 10.64.5.59/32 ip protocol 6 sport 80-106 dport 53 drop
+        ip saddr 172.17.184.240/20 ip daddr 172.18.169.254/20 ip protocol 6 sport 80-163 dport 10000-30274 drop
+        ip saddr 172.20.11.144/20 ip daddr 10.14.160.229/16 ip protocol 6 sport 995 dport 6379 drop
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 dport 1-49151 drop
+        ip saddr 172.30.60.43/20 ip daddr 192.168.90.164/32 ip protocol 1 accept
+        ip saddr 10.45.218.6/24 ip daddr 172.29.48.198/20 ip protocol 6 sport 22 dport 443-487 accept
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 192.168.251.222/16 ip daddr 172.25.150.104/20 ip protocol 6 sport 8000-8076 dport 22 accept
+        ip saddr 192.168.223.204/32 ip daddr 10.199.137.206/32 ip protocol 17 sport 53 dport 443-509 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-1023 dport 1-49151 drop
+        ip saddr 192.168.139.49/24 ip daddr 192.168.137.163/32 ip protocol 6 sport 1024-9977 dport 465 accept
+        ip saddr 192.168.251.230/24 ip daddr 10.77.230.131/16 ip protocol 17 sport 443-456 dport 80 drop
+        ip saddr 10.46.46.76/16 ip daddr 172.22.243.52/28 ip protocol 17 sport 993 dport 8000-8059 accept
+        ip saddr 10.74.204.6/16 ip daddr 172.18.72.200/28 ip protocol 6 sport 995 dport 10000-64280 drop
+        ip saddr 192.168.127.119/32 ip daddr 172.23.232.192/32 ip protocol 6 sport 6379 dport 0-27321 accept
+        ip saddr 172.26.86.136/20 ip daddr 192.168.21.153/32 ip protocol 6 sport 80-112 dport 8000-8025 accept
+        ip saddr 192.168.111.129/16 ip daddr 10.222.74.111/24 ip protocol 6 sport 8080 dport 8080-8111 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 1 drop
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 sport 1024-65535 accept
+        ip saddr 192.168.243.86/32 ip daddr 10.190.39.247/32 ip protocol 6 sport 6379 dport 25 drop
+        ip saddr 192.168.30.191/24 ip daddr 192.168.78.206/32 ip protocol 17 sport 1024-32995 dport 27017 drop
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 17 dport 1-49151 accept
+        ip saddr 172.22.44.197/20 ip daddr 172.27.118.27/32 ip protocol 6 sport 22 dport 8080-8151 accept
+        ip saddr 10.95.141.137/24 ip daddr 172.30.253.22/20 ip protocol 6 sport 30000-40508 dport 80 drop
+        ip saddr 172.16.0.0/12 ip daddr 10.0.0.0/8 ip protocol 6 dport 1-49151 drop
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1-49151 dport 1-1023 drop
+        ip saddr 192.168.187.246/32 ip daddr 192.168.194.17/32 ip protocol 17 sport 30000-53860 dport 1024-22041 accept
+        ip saddr 192.168.198.101/24 ip daddr 192.168.254.190/32 ip protocol 6 sport 8080 dport 465 accept
+        ip saddr 192.168.34.35/24 ip daddr 10.91.118.139/32 ip protocol 6 sport 6379 dport 22 drop
+        ip saddr 192.168.250.213/32 ip daddr 192.168.131.10/24 ip protocol 1 accept
+        ip saddr 10.239.165.114/32 ip daddr 10.184.203.76/24 ip protocol 6 sport 10000-63872 dport 143 accept
+        ip saddr 192.168.20.208/32 ip daddr 172.18.126.114/12 ip protocol 6 sport 0-13267 dport 30000-55253 accept
+        ip saddr 10.91.152.129/24 ip daddr 192.168.212.147/32 ip protocol 6 sport 30000-53459 dport 8080-8093 accept
+        ip saddr 172.26.204.231/28 ip daddr 192.168.226.210/16 ip protocol 17 sport 30000-51276 dport 10000-60081 drop
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 6 sport 1-1023 dport 1024-65535 accept
+        ip saddr 172.23.179.255/28 ip daddr 10.192.8.68/32 ip protocol 6 sport 8000-31593 dport 10000-36023 accept
+        ip saddr 172.16.133.140/28 ip daddr 172.16.53.207/28 ip protocol 17 sport 110 dport 993 accept
+        ip saddr 172.20.243.108/20 ip daddr 172.27.97.136/20 ip protocol 17 sport 995 dport 443-475 accept
+        ip saddr 172.22.245.63/32 ip daddr 192.168.166.62/32 ip protocol 6 sport 110 dport 30000-36249 accept
+        ip saddr 192.168.195.90/24 ip daddr 10.171.53.30/24 ip protocol 17 sport 10000-17899 dport 1024-50023 accept
+        ip saddr 10.195.213.84/16 ip daddr 192.168.21.21/32 ip protocol 17 sport 8000-8064 dport 443-449 drop
+        ip saddr 172.18.225.245/20 ip daddr 172.28.158.74/20 ip protocol 6 sport 6379 dport 80-150 accept
+        ip saddr 192.168.0.0/16 ip daddr 10.0.0.0/8 ip protocol 17 sport 1-49151 dport 1-1023 drop
+        ip saddr 192.168.222.117/32 ip daddr 10.69.13.199/24 ip protocol 17 sport 5432 dport 443-514 drop
+        ip saddr 10.124.16.185/16 ip daddr 172.26.89.99/28 ip protocol 6 sport 80-165 dport 8000-8044 accept
+        ip saddr 192.168.12.100/32 ip daddr 10.179.14.7/24 ip protocol 1 accept
+        ip saddr 192.168.191.101/24 ip daddr 192.168.43.239/24 ip protocol 6 sport 25 dport 8000-8900 drop
+        ip saddr 172.30.102.231/28 ip daddr 172.22.176.52/32 ip protocol 6 sport 27017 dport 8000-8070 drop
+        ip saddr 10.9.106.56/24 ip daddr 192.168.22.67/24 ip protocol 6 sport 443 dport 30000-47778 accept
+        ip saddr 10.34.25.27/24 ip daddr 172.27.134.234/32 ip protocol 1 accept
+        ip saddr 192.168.50.255/16 ip daddr 172.18.209.16/20 ip protocol 6 sport 8080-8151 dport 0-5210 accept
+        ip saddr 172.31.173.135/28 ip daddr 10.9.104.21/24 ip protocol 6 sport 465 dport 27017 accept
+        ip saddr 172.28.99.179/32 ip daddr 10.143.117.145/16 ip protocol 6 sport 5432 dport 80-173 drop
+        ip saddr 192.168.116.113/32 ip daddr 192.168.78.53/32 ip protocol 6 sport 25 dport 27017 accept
+        ip saddr 192.168.103.149/32 ip daddr 172.20.83.253/28 ip protocol 6 sport 1024-44030 dport 1024-21831 accept
+        ip saddr 172.16.0.0/12 ip daddr 172.16.0.0/12 ip protocol 6 dport 1-1023 accept
+        ip saddr 10.0.0.0/8 ip daddr 192.168.0.0/16 ip protocol 6 sport 1024-65535 dport 1-1023 drop
+        ip saddr 192.168.60.157/24 ip daddr 10.15.24.112/32 ip protocol 1 drop
+        ip saddr 192.168.140.47/24 ip daddr 10.54.170.190/16 ip protocol 17 sport 25 dport 9000-9072 accept
+        ip saddr 172.16.0.0/12 ip daddr 192.168.0.0/16 ip protocol 6 sport 1024-65535 drop
+        ip saddr 192.168.0.0/16 ip daddr 192.168.0.0/16 ip protocol 6 sport 1024-65535 drop
+        ip saddr 10.13.90.242/24 ip daddr 192.168.244.5/24 ip protocol 6 sport 10000-56662 dport 443-492 accept
+        ip saddr 10.115.218.16/16 ip daddr 10.138.42.235/8 ip protocol 6 sport 465 dport 1024-5358 drop
+        ip saddr 172.31.173.156/28 ip daddr 172.23.229.167/28 ip protocol 1 accept
+        ip saddr 192.168.19.183/32 ip daddr 172.30.158.237/32 ip protocol 6 sport 443 dport 8080-8174 accept
+        ip daddr 10.0.0.0/8 ip protocol 6 dport 80 accept
+        ip daddr 10.0.0.0/8 ip protocol 6 dport 443 accept
+        ip protocol 6 accept
+        drop
+    }
+}

@@ -1,0 +1,35 @@
+Proposer error: Claude subprocess timed out after 120s
+iteration 1 | proposed: none | verify: fail | depth: 143.61 -> 143.61 | status: reject
+iteration 2 | proposed: move_before | verify: pass | depth: 143.61 -> 138.75 | status: keep
+iteration 3 | proposed: move_before | verify: pass | depth: 138.75 -> 138.74 | status: keep
+iteration 4 | proposed: move_before | verify: pass | depth: 138.74 -> 138.74 | status: reject
+iteration 5 | proposed: move_before | verify: pass | depth: 138.74 -> 138.65 | status: keep
+iteration 6 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 7 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 8 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 9 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 10 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+Proposer error: Claude subprocess timed out after 120s
+iteration 11 | proposed: none | verify: fail | depth: 138.65 -> 138.65 | status: reject
+iteration 12 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+Proposer error: Claude subprocess timed out after 120s
+iteration 13 | proposed: none | verify: fail | depth: 138.65 -> 138.65 | status: reject
+iteration 14 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 15 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 16 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+Proposer error: Claude subprocess timed out after 120s
+iteration 17 | proposed: none | verify: fail | depth: 138.65 -> 138.65 | status: reject
+iteration 18 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 19 | proposed: move_before | verify: pass | depth: 138.65 -> 138.66 | status: reject
+iteration 20 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 21 | proposed: move_before | verify: pass | depth: 138.65 -> 138.66 | status: reject
+iteration 22 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 23 | proposed: move_before | verify: pass | depth: 138.65 -> 138.66 | status: reject
+iteration 24 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 25 | proposed: move_before | verify: pass | depth: 138.65 -> 138.66 | status: reject
+iteration 26 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+Proposer error: Claude subprocess timed out after 120s
+iteration 27 | proposed: none | verify: fail | depth: 138.65 -> 138.65 | status: reject
+iteration 28 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject
+iteration 29 | proposed: move_before | verify: pass | depth: 138.65 -> 138.66 | status: reject
+iteration 30 | proposed: move_before | verify: pass | depth: 138.65 -> 138.65 | status: reject

@@ -1,0 +1,22 @@
+{
+  "experiment_name": "hybrid_static_then_llm_k8s",
+  "scenario": "k8s_hybrid",
+  "algorithm": "llm_guided",
+  "start_time": "2026-03-19T21:00:44.557339",
+  "end_time": "2026-03-19T21:07:22.170675",
+  "total_iterations": 9,
+  "successful_mutations": 1,
+  "failed_mutations": 0,
+  "rejected_mutations": 8,
+  "baseline_score": 25.0,
+  "best_score": 114.4,
+  "improvement_pct": 357.6,
+  "total_tokens_used": 0,
+  "total_llm_latency_ms": 325626.89113616943,
+  "avg_iteration_time_ms": 44179.26179038154,
+  "mutation_type_distribution": {
+    "move_before": 8,
+    "swap": 1
+  },
+  "verification_pass_rate": 1.0
+}
